@@ -29,7 +29,6 @@
       "react-app/jest"
     ]
   },
-  "homepage": "http://jioo-developer.github.io/firebase",
   "browserslist": {
     "production": [
       ">0.2%",
