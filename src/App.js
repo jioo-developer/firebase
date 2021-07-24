@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react'
+import { Route } from 'react-router-dom';
 import './App.css';
-
+import {authService} from "./Firebase"
 function App() {
+  const [init,setInit] = useState(false);
+  const [Login,setLogin] = useState(false);
+  useEffect(()=>{
+    authService.onAuthStateChanged((user)=>{
+      if(user) {
+        setLogin(true)
+      } else {
+        setLogin(false)
+      }
+      setInit(true)
+    })
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        init ? (
+          Login ? (
+            <Route exact path="/">
+              <div className="wrap">홈</div>
+            </Route>
+          ) : (
+            <Route exact path="/">
+              
+            </Route>
+          ) 
+        ) : null
+      }
     </div>
   );
 }
