@@ -21,11 +21,11 @@ function Auth() {
                history.push("/")
             })
         } catch(error){
-            if(error.message == "The email address is badly formatted."){
+            if(error.message === "The email address is badly formatted."){
                 window.alert("올바른 이메일 형식이 아닙니다.")
-            } else if(error.message == "Password should be at least 6 characters"){
+            } else if(error.message === "Password should be at least 6 characters"){
                 window.alert("비밀번호가 너무짧습니다.")
-            } else if(error.message == "The email address is already in use by another account."){
+            } else if(error.message === "The email address is already in use by another account."){
                 window.alert("이미 사용중인 이메일입니다.")
             } else{
                 console.log(error.message)
@@ -41,7 +41,7 @@ function Auth() {
             </div>
             <form className="auth-form" onSubmit={SignF}>
                 <p className="id_title">이메일&nbsp;<span>*</span></p>
-                <input type="text" class="form-control" name="id" placeholder="이메일을 입력하세요." required  value={id} onChange={e => setId(e.target.value)}/>
+                <input type="text" className="form-control" name="id" placeholder="이메일을 입력하세요." required  value={id} onChange={e => setId(e.target.value)}/>
                 <p className="warning">※ 실제 사용하시는 이메일을 사용하셔야 비밀번호를 찾으실 수 있습니다.</p>
                 <p className="id_title">비밀번호</p>
                 <input type="password" className="form-control" name="password" placeholder="8자리 이상 입력하세요." required  value={password} onChange={e => setPassword(e.target.value)}/>
@@ -59,7 +59,7 @@ function Auth() {
                         target.style.border="1px solid #eee"
                     }
                 }}/>
-                <label for="all_check" className="check"></label>
+                <label htmlFor="all_check" className="check"></label>
                 <p className="check_text">전체 약관 동의</p>
              </div>
              <ul className="check_wrap">
@@ -76,7 +76,7 @@ function Auth() {
                             target.style.border="1px solid #eee"
                         }
                     }}/>
-                    <label for="auth_check" className="check"></label>
+                    <label htmlFor="auth_check" className="check"></label>
                     <p className="check_text">회원가입및 운영약관 동의 (필수)</p>
                 </li>
                  <li>
@@ -92,18 +92,18 @@ function Auth() {
                             target.style.border="1px solid #eee"
                         }
                     }}/>
-                    <label for="data_check" className="check"></label>
+                    <label htmlFor="data_check" className="check"></label>
                     <p className="check_text">개인정보 수집 및 동의 (필수)</p>
                 </li>
                  <li>
                     <input type="checkbox" id="location_check"/>
-                    <label for="location_check" className="check"></label>
+                    <label htmlFor="location_check" className="check"></label>
                     <p className="check_text">위치정보 이용약관 동의 (선택)</p>
                 </li>
              </ul>
             </section>
             {
-                 check || dataCheck && locationCheck ? <button className="btn">회원가입</button> : <div class="un_btn">회원가입</div>
+                 check || dataCheck && locationCheck ? <button className="btn">회원가입</button> : <div className="un_btn">회원가입</div>
              }
             </form>
         </div>
