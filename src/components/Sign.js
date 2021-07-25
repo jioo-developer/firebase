@@ -13,7 +13,13 @@ function Sign() {
             try{
                 await authService.signInWithEmailAndPassword(id,password)
             } catch(error){
-                window.confirm(error)
+                if(error.message ==="The password is invalid or the user does not have a password"){
+                    window.alert("암호가 잘못되었거나 사용자에게 암호가 없습니다.")
+                } else{
+                    if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted."){
+                        window.alert("이메일이 존재하지않거나, 삭제된 이메일입니다.")
+                    }
+                }
         }
     }
 
