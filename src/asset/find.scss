@@ -1,0 +1,41 @@
+@import "mixin.scss";
+
+.find_wrap{
+    @include reset();
+
+    .title_area{
+        @include textarea();
+
+        .close{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+
+            img{
+                width: 100%;
+                filter: invert(1);
+            }
+        }
+    }
+
+    .find-form{
+        @include size();
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;  
+        
+        .form-control{
+            @include input-text();
+            &::placeholder{
+                color: gray;
+            }
+        }
+
+        .btn{
+            @include btn();
+            background: #2a96ee;
+            color: #fff;
+        }
+    }
+}

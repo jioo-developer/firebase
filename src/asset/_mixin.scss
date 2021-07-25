@@ -29,3 +29,22 @@
     cursor: pointer;
     border-radius: 7px
 }
+
+@mixin reset {
+    margin: 0 auto;
+    max-width: 375px;
+    width: 90%;
+    height: 83vh;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+@mixin textarea {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 50px;
+    color: #444
+}

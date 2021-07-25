@@ -2,12 +2,7 @@
 
 .sign_wrap{
     @include flex();
-    margin: 0 auto;
-    max-width: 375px;
-    width: 90%;
-    height: 83vh;
-    flex-direction: column;
-    justify-content: flex-start;
+    @include reset();
     
     .logo{
         display: flex;

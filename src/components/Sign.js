@@ -3,10 +3,10 @@ import Header from './Header'
 import { authService, firebaseInstance } from '../Firebase';
 import { Link } from 'react-router-dom';
 import "../asset/Sign.scss"
-import "../asset/header.scss"
 function Sign() {
     const [id,setId] = useState(""); 
     const [password,setPassword] = useState("")
+    let provider;
 
     async function LoginF(e){
         e.preventDefault( );
@@ -15,6 +15,16 @@ function Sign() {
             } catch(error){
                 window.confirm(error)
         }
+    }
+
+    async function onGoogle(){
+            provider = new firebaseInstance.auth.GoogleAuthProvider();
+             await authService.signInWithPopup(provider)
+    }
+
+    async function onFacebook(){
+            provider = new firebaseInstance.auth.FacebookAuthProvider();
+             await authService.signInWithPopup(provider)
     }
 
     return (
@@ -30,19 +40,17 @@ function Sign() {
                 <button className="btn">로그인</button>
             </form>
             <div className="sns_sign">
-                <button className="sns-btn"  name="google">
+                <button className="sns-btn"  name="google" onClick={onGoogle}>
                 <img src="./img/google.svg" alt=""/>    
-                <figcaption class="btn_title">구글로 시작하기
-                </figcaption>
+                <figcaption class="btn_title">구글로 시작하기</figcaption>
                 </button>
-                <button className="sns-btn"  name="facebook">
+                <button className="sns-btn"  name="facebook" onClick={onFacebook}>
                 <img src="./img/facebook.svg" alt=""/>    
-                <figcaption class="btn_title">페이스북으로 시작하기
-                </figcaption>
+                <figcaption class="btn_title">페이스북으로 시작하기</figcaption>
                 </button>
             </div>
             <div className="assistance">
-             <button className="pw_reset ass_btn"><Link to="">비밀번호 재설정</Link></button>
+             <button className="pw_reset ass_btn"><Link to="/Find">비밀번호 재설정</Link></button>
              <button className="ass_auth ass_btn"><Link to="">회원가입</Link></button>
             </div>
         </div>
