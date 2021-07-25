@@ -1,7 +1,6 @@
 @import "mixin.scss";
 
 .find_wrap{
-    @include reset();
 
     .title_area{
         @include textarea();
@@ -10,12 +9,10 @@
             width: 20px;
             height: 20px;
             position: absolute;
+            top: 50%;
             left: 0;
-
-            img{
-                width: 100%;
-                filter: invert(1);
-            }
+            margin-top: -10px;
+            filter: invert(1);
         }
     }
 

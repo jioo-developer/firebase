@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Route, useHistory } from 'react-router-dom';
 import './App.css';
+import "./asset/reset.css"
+import "./asset/common.scss"
 import Sign from './components/Sign';
 import {authService} from "./Firebase"
-import "./asset/header.scss"
 import Find from './components/Find';
+import Auth from './components/Auth';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -36,16 +38,22 @@ function App() {
                 }
               </div>
             </Route>
-          ) : (
+          ) :
+          <>
             <Route exact path="/">
               <Sign/>
             </Route>
-          ) 
+
+            <Route exact path="/Find">
+              <Find/>
+            </Route>
+
+            <Route exact path="/Auth">
+              <Auth/>
+            </Route>
+            </>
         ) : ""
       }
-      <Route exact path="/Find">
-        <Find/>
-      </Route>
     </div>
   );
 }

@@ -4,5 +4,9 @@ header{
     @include flex();
     @include size();
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 10px;;
+}
+
+.wrap{
+    @include reset();
 }

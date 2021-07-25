@@ -1,9 +1,6 @@
 @import "mixin.scss";
 
 .sign_wrap{
-    @include flex();
-    @include reset();
-    
     .logo{
         display: flex;
         flex-direction: column;

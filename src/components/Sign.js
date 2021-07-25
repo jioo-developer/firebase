@@ -28,7 +28,7 @@ function Sign() {
     }
 
     return (
-        <div className="sign_wrap">
+        <div className="sign_wrap wrap">
             <Header/>
             <h1 className="logo">
              <img src="./img/logo.svg" alt=""/>
@@ -51,7 +51,7 @@ function Sign() {
             </div>
             <div className="assistance">
              <button className="pw_reset ass_btn"><Link to="/Find">비밀번호 재설정</Link></button>
-             <button className="ass_auth ass_btn"><Link to="">회원가입</Link></button>
+             <button className="ass_auth ass_btn"><Link to="/Auth">회원가입</Link></button>
             </div>
         </div>
     )

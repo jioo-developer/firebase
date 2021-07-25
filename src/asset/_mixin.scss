@@ -31,6 +31,7 @@
 }
 
 @mixin reset {
+    @include flex();
     margin: 0 auto;
     max-width: 375px;
     width: 90%;
