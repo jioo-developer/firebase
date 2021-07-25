@@ -47,5 +47,7 @@
     align-items: center;
     position: relative;
     height: 50px;
-    color: #444
+    color: #444;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
 }

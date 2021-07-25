@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import Header from './Header'
 import "../asset/find.scss"
 import { authService } from '../Firebase';
-import { Link } from 'react-router-dom';
 import Title from './Title';
 function Find() {
     let [findPw,setFindPw] = useState("")
     async function resetpw(e){
         e.preventDefault();
-        if(findPw !=""){
+        if(findPw !==""){
             authService.sendPasswordResetEmail(findPw).then(()=>{
                 window.alert("입력하신 메일로 비밀번호 안내드렸습니다.")
             })
