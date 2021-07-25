@@ -1,0 +1,8 @@
+@import "mixin.scss";
+
+header{
+    @include flex();
+    @include size();
+    justify-content: space-between;
+    margin-top: 10px;
+}

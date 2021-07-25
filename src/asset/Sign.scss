@@ -1,0 +1,94 @@
+@import "mixin.scss";
+
+.sign_wrap{
+    @include flex();
+    margin: 0 auto;
+    max-width: 375px;
+    width: 90%;
+    height: 83vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    .logo{
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        padding-top: 175px
+    }
+
+    .login .logo img {
+        width: 100%
+    }
+
+    .logo_title{
+        margin-bottom: 10px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .sign-form{
+        @include size();
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+
+        .form-control{
+            @include input-text();
+            &::placeholder{
+                color: gray;
+            }
+        }
+
+        .btn{
+            @include btn();
+            @include flex();
+            background: #2a96ee;
+            color: #fff;
+        }
+    }
+
+    .sns_sign{
+        display: flex;
+        @include size();
+
+        .sns-btn{
+            @include flex();
+            @include btn();
+            flex-direction: column;
+            width: 50%;
+            height: 100px;
+            background: #fff;
+            border-radius: 3px;
+            margin-top: 10px;
+
+            img{
+                width: 20px;
+                height: 20px;
+                margin-bottom: 10px;
+            }
+
+            .btn_title{
+                font-size: 15px;
+            }
+        }
+    }
+
+    .assistance{
+        @include flex();
+        @include size();
+        justify-content: space-between;
+        margin-top: 10px;
+
+        .ass_btn{
+            border: 0;
+            outline: 0;
+            background: transparent;
+            display: inline-block;
+        }
+
+        a{
+            font-size: 14px;
+            color: #888;
+        }
+    }
+}
