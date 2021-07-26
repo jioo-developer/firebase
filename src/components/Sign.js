@@ -41,8 +41,8 @@ function Sign() {
              <figcaption className="logo_title">사용하실 프로젝트를 입력하세요.</figcaption>
             </h1>
             <form onSubmit={LoginF} className="sign-form">
-                <input type="text" class="form-control" name="id" placeholder="id" required  value={id} onChange={e => setId(e.target.value)}/>
-                <input type="password" className="form-control" name="password" placeholder="password" required  value={password} onChange={e => setPassword(e.target.value)}/>
+                <input type="text" class="form-control" name="id" placeholder="아이디" required  value={id} onChange={e => setId(e.target.value)}/>
+                <input type="password" className="form-control" name="password" placeholder="비밀번호" required  value={password} onChange={e => setPassword(e.target.value)}/>
                 <button className="btn">로그인</button>
             </form>
             <div className="sns_sign">

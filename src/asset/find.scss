@@ -1,21 +1,6 @@
 @import "mixin.scss";
 
 .find_wrap{
-
-    .title_area{
-        @include textarea();
-
-        .close{
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            top: 50%;
-            left: 0;
-            margin-top: -10px;
-            filter: invert(1);
-        }
-    }
-
     .find-form{
         @include size();
         display: flex;
