@@ -1,55 +1,99 @@
 @import "mixin.scss";
 
-.wrap{
-    .header{
-        @include flex();
-        @include size();
-        justify-content: space-between;
-        margin-top: 25px;
-        a{
+.main_wrap{
+
+    @include reset();
+
+    .in_wrap{
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+
+        .header{
+            @include flex();
+            @include size();
+            justify-content: space-between;
+            margin-top: 20px;
+
+            a{
+                display: none;
+            }
+
+        .title{
+            font-size: 25px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+        }
+
+        .menu{
+            @include flex();
+
+        input[type="text"]{
             display: none;
         }
 
-        .title{
-            font-size: 30px;
-            font-weight: 600;
-        }
-
-        .icon_wrap{
-            @include flex();
-            justify-content: space-between;
-            width: 200px;
         .search{
-            width: 35px;
-            height: 35px;
             @include btn-Reset();
+            margin-right: 40px;
 
             img{
-                width: 100%;
+                width: 25px;
             }
         }
+        
+        .profile{
+            width: 35px;
+            border-radius: 50%;
+        }
 
-        .nav{
+        }
+    }
+
+    .post_section{
+        margin: 0 auto;
+        width: 95%;
+
+        .post{
+            @include size();
             display: flex;
             flex-direction: column;
-            width: 30px;
-            height: auto;
-        }
+            margin-top: 32px;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 4%);
 
-        .nav li{
-            width: 100%;
-            height: 3px;
-            margin-bottom: 5px;
-            background: #333;
+            .thumbnail{
+                @include size();
+                height: 180px;
+                background: #ddd;
+            }
 
-            &:last-child{
-                margin-bottom: 0;
+            .text_wrap{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 16px;
+                height: 165px;
+                box-sizing: border-box;
+            }
+
+            .writer_wrap{
+                @include flex();
+                justify-content: space-between;
+                border-top: 1px solid #eee;
+                box-sizing: border-box;
+                padding:15px;
+                .id{
+                    display: flex;
+
+                    img{
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 10px;
+                    }
+                }
             }
         }
-
-        .bell{
-            @extend .search;
-        }
-        }
+    }
     }
 }

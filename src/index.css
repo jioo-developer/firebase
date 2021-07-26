@@ -53,20 +53,6 @@ a {
     color: #333333;
 }
 
-.app {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1920px;
-    overflow: hidden;
-}
-
-header,
-section,
-footer {
-    float: left;
-    width: 100%;
-    overflow: hidden;
-}
 
 .in_wrap {
     margin: 0 auto;
