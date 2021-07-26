@@ -28,7 +28,7 @@ function Auth() {
             } else if(error.message === "The email address is already in use by another account."){
                 window.alert("이미 사용중인 이메일입니다.")
             } else{
-                console.log(error.message)
+                window.alert(error.message)
             }
         }
     }

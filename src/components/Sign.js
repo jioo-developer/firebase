@@ -13,12 +13,14 @@ function Sign() {
             try{
                 await authService.signInWithEmailAndPassword(id,password)
             } catch(error){
-                if(error.message ==="The password is invalid or the user does not have a password"){
+                if(error.message === "The password is invalid or the user does not have a password."){
                     window.alert("암호가 잘못되었거나 사용자에게 암호가 없습니다.")
-                } else{
-                    if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted."){
+                } else if(error.message === "There is no user record corresponding to this identifier. The user may have been deleted."){
                         window.alert("이메일이 존재하지않거나, 삭제된 이메일입니다.")
-                    }
+                } else if(error.message === "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."){
+                    window.alert("로그인 시도 실패로 인해 이 계정에 대한 액세스가 일시적으로 비활성화되었습니다. 암호를 재설정하여 즉시 복원하거나 나중에 다시 시도할 수 있습니다.")
+                } else {
+                    window.alert(error.message)
                 }
         }
     }

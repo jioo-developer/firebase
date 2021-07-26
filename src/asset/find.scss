@@ -1,6 +1,7 @@
 @import "mixin.scss";
 
 .find_wrap{
+    width: 90%;
     .find-form{
         @include size();
         display: flex;

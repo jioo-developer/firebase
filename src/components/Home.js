@@ -57,6 +57,7 @@ function Home() {
                 })
               }
             </section>
+            <button className="btn" onClick={OnLogOut}>로그아웃</button>
         </div>
     )
 }
