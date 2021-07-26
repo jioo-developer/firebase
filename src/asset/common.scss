@@ -17,10 +17,6 @@ header{
 
 .title_area{
         @include textarea();
-
-        @media #{$breakpoint-mobile}{
-           margin-top: 20px;
-    }
         .close{
             width: 20px;
             height: 20px;
