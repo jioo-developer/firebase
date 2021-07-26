@@ -1,12 +1,17 @@
 @import "mixin.scss";
 
+$color : #000;
+$rgba : rgba($color, 0.05);
+
 .main_wrap{
 
     @include reset();
+    background: #f9f9f9c7;
 
     .in_wrap{
         display: flex;
         width: 90%;
+        height: 100%;
         flex-direction: column;
 
         .header{
@@ -20,9 +25,9 @@
             }
 
         .title{
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 500;
-            letter-spacing: 1.5px;
+            color: #333;
         }
 
         .menu{
@@ -34,15 +39,15 @@
 
         .search{
             @include btn-Reset();
-            margin-right: 40px;
+            margin-right: 20px;
 
             img{
-                width: 25px;
+                width: 22px;
             }
         }
         
         .profile{
-            width: 35px;
+            width: 30px;
             border-radius: 50%;
         }
 
@@ -51,21 +56,22 @@
 
     .post_section{
         margin: 0 auto;
-        width: 95%;
+        background: #fff;
+        margin-top: 32px;
+        box-shadow: 0 4px 16px 0 $rgba; 
 
         .post{
             @include size();
             display: flex;
             flex-direction: column;
-            margin-top: 32px;
-            border-radius: 5px;
             background: #fff;
-            box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 4%);
 
             .thumbnail{
                 @include size();
                 height: 180px;
                 background: #ddd;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
             }
 
             .text_wrap{
@@ -73,7 +79,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 padding: 16px;
-                height: 165px;
+                height: 150px;
                 box-sizing: border-box;
             }
 

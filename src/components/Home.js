@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import Title from './Title';
 import { authService, db } from '../Firebase';
