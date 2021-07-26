@@ -1,0 +1,55 @@
+@import "mixin.scss";
+
+.wrap{
+    .header{
+        @include flex();
+        @include size();
+        justify-content: space-between;
+        margin-top: 25px;
+        a{
+            display: none;
+        }
+
+        .title{
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .icon_wrap{
+            @include flex();
+            justify-content: space-between;
+            width: 200px;
+        .search{
+            width: 35px;
+            height: 35px;
+            @include btn-Reset();
+
+            img{
+                width: 100%;
+            }
+        }
+
+        .nav{
+            display: flex;
+            flex-direction: column;
+            width: 30px;
+            height: auto;
+        }
+
+        .nav li{
+            width: 100%;
+            height: 3px;
+            margin-bottom: 5px;
+            background: #333;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+
+        .bell{
+            @extend .search;
+        }
+        }
+    }
+}

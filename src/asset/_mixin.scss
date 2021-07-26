@@ -21,6 +21,12 @@
     text-indent: 10px   
 }
 
+@mixin btn-Reset {
+        outline: 0;
+        border: 0;
+        background: transparent;
+}
+
 @mixin btn {
     font-size: 18px;
     border: 0;
@@ -51,3 +57,5 @@
     border-bottom: 1px solid #eee;
     box-sizing: border-box;
 }
+
+$breakpoint-mobile :"all and (max-width:500px)";

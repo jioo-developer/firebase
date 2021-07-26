@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {Route} from 'react-router-dom';
-import './App.css';
 import "./asset/reset.css"
 import "./asset/common.scss"
 import Sign from './components/Sign';
