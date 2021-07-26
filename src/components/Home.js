@@ -21,8 +21,7 @@ function Home() {
     history.push("/")
   }
     return (
-        <div className="main_wrap">
-          <div className="in_wrap">
+        <div className="main">
             <Header/>
             <div className="header">
             <Title/>
@@ -38,7 +37,9 @@ function Home() {
                 posts.map(function(post,i){
                   return <>
                   <div className="post">
-                    <figure className="thumbnail"></figure>
+                    <figure className="thumbnail">
+                      <img src="./img/test.jpg" alt=""/>
+                    </figure>
                     <div className="text_wrap">
                       <p className="post_title">{post.title}</p>
                       <p className="post_text">{post.text}</p>
@@ -49,14 +50,13 @@ function Home() {
                         <img src="./img/profile.svg" alt="" className="profile"/>
                         <p className="profile_id">rlawlgh388</p>
                       </div>
-                      <div className="favorite">🤍 0</div>
+                      <p className="favorite">🤍 0</p>
                     </div>
                   </div>
                   </>
                 })
               }
             </section>
-            </div>
         </div>
     )
 }

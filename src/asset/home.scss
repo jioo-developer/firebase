@@ -3,16 +3,11 @@
 $color : #000;
 $rgba : rgba($color, 0.05);
 
-.main_wrap{
-
+.main{
     @include reset();
     background: #f9f9f9c7;
-
-    .in_wrap{
-        display: flex;
-        width: 90%;
-        height: 100%;
-        flex-direction: column;
+    padding: 0 15px;
+    box-sizing: border-box;
 
         .header{
             @include flex();
@@ -72,15 +67,37 @@ $rgba : rgba($color, 0.05);
                 background: #ddd;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
+                overflow: hidden;
+
+                img{
+                    width: 100%;
+                }
             }
 
             .text_wrap{
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 padding: 16px;
                 height: 150px;
                 box-sizing: border-box;
+                position: relative;
+
+                .post_title{
+                    font-weight: 500;
+                }
+
+                .post_text{
+                    font-weight: 300;
+                    color: #333;
+                    margin-top: 10px;
+                }
+
+                .post_date{
+                    font-size: 14px;
+                    color: gray;
+                    position: absolute;
+                    bottom: 15px;
+                }
             }
 
             .writer_wrap{
@@ -91,15 +108,25 @@ $rgba : rgba($color, 0.05);
                 padding:15px;
                 .id{
                     display: flex;
+                    align-items: center;
 
                     img{
                         width: 24px;
                         height: 24px;
                         margin-right: 10px;
                     }
+
+                    .profile_id{
+                        font-size: 12px;
+                        line-height: 1;
+                    }
                 }
+
+                    .favorite{
+                        font-size: 12px;
+                        line-height: 1;
+                    }
             }
         }
-    }
     }
 }
