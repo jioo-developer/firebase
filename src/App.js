@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, useHistory } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './App.css';
 import "./asset/reset.css"
 import "./asset/common.scss"
@@ -7,10 +7,10 @@ import Sign from './components/Sign';
 import {authService} from "./Firebase"
 import Find from './components/Find';
 import Auth from './components/Auth';
+import Home from './components/Home';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
-  const history = useHistory();
   useEffect(()=>{
     authService.onAuthStateChanged((user)=>{
       if(user) {
@@ -22,21 +22,13 @@ function App() {
     })
   },[])
 
-  function OnLogOut(){
-    authService.signOut();
-    history.push("/")
-  }
   return (
     <div className="App">
       {
         init ? (
           Login ? (
             <Route exact path="/">
-              <div className="wrap">
-                {
-                  <button onClick={OnLogOut}>로그아웃</button>
-                }
-              </div>
+              <Home/>
             </Route>
           ) :
           <>
@@ -47,7 +39,7 @@ function App() {
             <Route exact path="/Find">
               <Find/>
             </Route>
-
+            
             <Route exact path="/Auth">
               <Auth/>
             </Route>
