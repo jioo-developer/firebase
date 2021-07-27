@@ -30,6 +30,7 @@ function Home() {
             <input type="text" id="search_form"/>
             <label htmlFor="search" className="search"><img src="./img/search.svg" alt=""/></label>
             <img src="./img/profile.svg" alt="" className="profile"/>
+            <img src="./img/arrow.svg" alt="" className="arrow"/>
             </div>
             </div>
             <section className="post_section">

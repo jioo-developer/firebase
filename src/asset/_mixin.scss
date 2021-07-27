@@ -39,7 +39,7 @@
 @mixin reset {
     @include flex();
     margin: 0 auto;
-    max-width: 375px;
+    max-width: 400px;
     width: 100%;
     height: 100vh;
     flex-direction: column;
