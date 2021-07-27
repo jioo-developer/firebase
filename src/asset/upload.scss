@@ -47,7 +47,21 @@
             height: 600px;
             margin-bottom: 30px;
             padding-top: 15px;
-            resize: none;
+            position: relative;
+
+            textarea{
+                @include btn-Reset();
+                width: 100%;
+                cursor: inherit;
+                resize: none;
+            }
+
+            .att{
+                float: left;
+                width: 400px;
+                height: 400px;
+                padding-left: 10px;
+            }
 
             @media #{$breakpoint-mobile}{
                 height: 350px;
@@ -58,7 +72,7 @@
             }
         }
 
-        input[type="file"] {
+        input[type="file"]{
             display: none;
         }
 
@@ -71,10 +85,15 @@
             color: gray;
             border-radius: 5px;
             margin-bottom: 30px;
+            cursor: pointer;
 
             @media #{$breakpoint-mobile}{
                 height: 100px;
             }
+        }
+
+        #file-upload-button{
+            display: none;
         }
         
         .image-att{
@@ -82,31 +101,44 @@
         }
     }
 
-    .cancel_wrap{
-        display: flex;
-        margin-left: auto;
-        width: 100%;
-        height: auto;
+    .bottom_wrap{
+        @include flex();
         justify-content: space-between;
         padding-bottom: 20px;
 
-        .exit{
-            @include btn-Reset();
-            color: #666;
-            font-weight: 500;
-            font-size: 18px;
-        }
+    .cancel_wrap{
+        display: flex;
+        margin-left: auto;
+        width: 240px;
+        height: auto;
+        justify-content: space-between;
 
         .post{
             @include btn();
-            width: 250px;
-            height: 60px;
-            background: #2a96ee;
+            width: 112px;
+            height: 45px;
+            background:rgb(32, 201, 151);
             color: #fff;
 
             @media #{$breakpoint-mobile}{
                 width: 70%;
             }
         }
+
+        .delete{
+            @extend .post;
+            background: rgb(241, 243, 245);
+            color: #333;
+            text-align: center;
+            line-height: 45px;
+        }
     }
-}
+        .exit{
+            @include btn-Reset();
+            color: #666;
+            font-weight: 500;
+            font-size: 17px;
+        }
+      }
+    }
+

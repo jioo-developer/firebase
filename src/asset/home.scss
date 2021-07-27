@@ -7,9 +7,13 @@ $rgba : rgba($color, 0.05);
     background: #f9f9f9c7;
 
 .in_wrap{
-    @include reset();
-    width: 90%;
-    position: relative;
+        @include reset();
+        width: 90%;
+        position: relative;
+
+        @media #{$breakpoint-mobile}{
+            height: auto;
+        }
 
         header{
             @include flex();
@@ -62,7 +66,9 @@ $rgba : rgba($color, 0.05);
     }
 
     .post_section{
+        display: flex;
         margin-top: 32px;
+        flex-wrap: wrap;
 
         .post{
             display: flex;
@@ -71,6 +77,11 @@ $rgba : rgba($color, 0.05);
             flex-direction: column;
             background: #fff;
             box-shadow: 0 4px 16px 0 $rgba; 
+            margin: 16px;
+
+            &:first-child{
+                margin-left: 0;
+            }
 
             @media #{$breakpoint-mobile}{
                 width: 100%;
@@ -155,6 +166,8 @@ $rgba : rgba($color, 0.05);
         @media #{$breakpoint-mobile}{
             width: 50px;
             bottom: 40px;
+            right: 10px;
+            z-index: 1000;
         }
 
         img{

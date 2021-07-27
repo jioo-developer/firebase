@@ -1,29 +1,97 @@
 import React, { useState } from 'react'
 import "../asset/upload.scss"
 import { Link,useHistory } from 'react-router-dom';
-function Upload() {
+import { db, storageService } from '../Firebase';
+function Upload(props) {
     let [title,setTitle] = useState("")
     let [textarea,setTextarea] =  useState("");
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
-
+    let user = props. user
     const history = useHistory();
+
+    function onFileChange(e){
+        const theFile = e.target.files[0];
+        setFileName(theFile)
+        const reader = new FileReader();
+        reader.onloadend = (finished) => {
+            const {
+                currentTarget : {result},
+            } = finished
+
+            setFile(result)
+        }
+            if(theFile){
+                reader.readAsDataURL(theFile)
+            }
+    }
+
+    async function post(e){
+        e.preventDefault();
+        let attchmentUrl =""; //이미지 추출경로 변수
+        if(file !== ""){
+            const fileRef = storageService.ref().child(`${user.id}/${fileName.name}`)
+            const response = await fileRef.putString(file,"data_url");
+            attchmentUrl = await response.ref.getDownloadURL();
+        }
+
+        const content = {
+            title : title,
+            text: textarea,
+            이미지주소 : attchmentUrl
+        }
+
+        await db.collection("rlawlgh388").add(content).then(()=>{
+            window.alert("포스트가 업로드 되었습니다.")
+            history.push("/")
+        })
+    }
+
+    function clearPhoto(){
+        setFile(null)
+        document.querySelector(".file-form").value=null;
+    }
+
+    function reset(){
+        document.querySelector("#title").value="";
+        document.querySelector(".text").value="";
+        document.querySelector(".file-form").value=null;
+        setTimeout(() => {
+            setFile(null)
+        }, 1000);
+    }
+
+    function enterEvent(){
+        if(window.event.keyCode == 13){
+            let height = document.querySelector(".text").clientHeight;
+            height.style.height = height + 38
+        }
+    }
+
     return (
         <div className="upload">
-            <form>
+            <form onSubmit={post}>
                 <input type="text" className="form-control titlearea" id="title" placeholder="제목을 입력하세요." maxLength={120} onChange={e=>setTitle(e.target.value)}/>
-                <textarea className="form-control textarea" id="text" placeholder="당신의 이야기를 적어보세요." onChange={e=>setTextarea(e.target.value)}/>
-                <input type="file" accept="image/*" className="file-form" id="image"/>
+                <div className="textarea">
+                    <textarea className="text" placeholder="당신의 이야기를 적어보세요." onKeyUp={enterEvent} onChange={e=>setTextarea(e.target.value)}></textarea>
+                    <figure>
+                    {
+                        file && <img src={file} className="att" alt=""/>
+                    }
+                    </figure>
+                </div>
+                <input type="file" accept="image/*" className="file-form" id="image" onChange={onFileChange}/>
                 <label htmlFor="image" className="Attachment image-att">이미지를 담아주세요</label>
-                <input type="file" accept="" className="file-form" id="file" />
-                <label htmlFor="file" className="Attachment">파일을 담아주세요</label>
-            </form>
-            <div className="cancel_wrap">
-                <button className="exit" onClick={()=>{
+                <div className="bottom_wrap">
+                <div className="exit" onClick={()=>{
                     history.push("/")
-                }}>← &nbsp;나가기</button>
-                <button className="post">글작성</button>
+                }}>← &nbsp;나가기</div>
+            <div className="cancel_wrap">
+                <div className="delete" onClick={clearPhoto}>파일삭제</div>
+                <button type="submit" className="post" onClick={reset}>글작성</button>
             </div>
+            </div>
+            </form>
         </div>
     )
 }

@@ -8,10 +8,12 @@ import Upload from './components/Upload';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
+  const [userObj,setUserObj] = useState(null)
   useEffect(()=>{
     authService.onAuthStateChanged((user)=>{
       if(user) {
         setLogin(true)
+        setUserObj(user)
       } else {
         setLogin(false)
       }
@@ -29,7 +31,7 @@ function App() {
               <Home/>
             </Route>
             <Route exact path="/upload">
-              <Upload/>
+              <Upload user={userObj}/>
             </Route>
             </>
           ) :
