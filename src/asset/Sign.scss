@@ -1,7 +1,16 @@
 @import "mixin.scss";
 
+$color : #000;
+$rgba : rgba($color, 0.8);
+
+.App{
+    position: relative;
+}
+
 .sign_wrap{
-    width: 90%;
+
+    @include media();
+
     .logo{
         display: flex;
         flex-direction: column;
@@ -14,7 +23,7 @@
     }
 
     .logo_title{
-        margin-bottom: 10px;
+        margin:10px 0 23px 0;
         font-size: 20px;
         text-align: center;
     }
@@ -23,7 +32,6 @@
         @include size();
         display: flex;
         flex-direction: column;
-        margin-top: 20px;
 
         .form-control{
             @include input-text();
@@ -73,15 +81,64 @@
         margin-top: 10px;
 
         .ass_btn{
-            border: 0;
-            outline: 0;
-            background: transparent;
+            @include btn-Reset();
             display: inline-block;
+            font-size: 14px;
+            color: #888;
         }
 
         a{
-            font-size: 14px;
-            color: #888;
+            @extend .ass_btn;
+        }
+    }
+}
+
+.find{
+    @include flex();
+    @include size();
+    background: $rgba;
+    position: absolute;
+    inset: 0;
+
+    .find_wrap{
+        @include media();
+        background: #fff;
+        padding: 15px;
+        padding-top: 0;
+        box-sizing: border-box;
+    }
+
+    .find-form{
+        @include size();
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px; 
+        
+        .form-control{
+            @include input-text();
+            &::placeholder{
+                color: gray;
+            }
+        }
+
+        .btn_wrap{
+            display: flex;
+            margin-left: auto;
+
+        .btn{
+            @include flex();
+            @include btn-Reset();
+            width: 53px;
+            height: 33px;
+            font-size: 15px;
+            background: #2a96ee;
+            color: #fff;
+
+            &:first-child{
+                margin-right: 10px;
+            }
+        }
+
         }
     }
 }

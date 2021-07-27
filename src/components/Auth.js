@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import Header from './Header'
-import Title from './Title'
 import "../asset/auth.scss"
 import { authService } from '../Firebase';
-import {useHistory} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 
 function Auth() {
     let [id,setId] = useState("");
@@ -34,16 +32,15 @@ function Auth() {
     }
     return (
         <div className="Auth_wrap wrap">
-            <Header/>
             <div className="title_area">
-               <Title/>
+                <Link to="/"><img src="./img/close-24px.svg" className="close" alt=""/></Link>
                 <p>회원가입</p>
             </div>
             <form className="auth-form" onSubmit={SignF}>
                 <p className="id_title">이메일&nbsp;<span>*</span></p>
                 <input type="text" className="form-control" name="id" placeholder="이메일을 입력하세요." required  value={id} onChange={e => setId(e.target.value)}/>
                 <p className="warning">※ 실제 사용하시는 이메일을 사용하셔야 비밀번호를 찾으실 수 있습니다.</p>
-                <p className="id_title">비밀번호</p>
+                <p className="id_title">비밀번호&nbsp;<span>*</span></p>
                 <input type="password" className="form-control" name="password" placeholder="8자리 이상 입력하세요." required  value={password} onChange={e => setPassword(e.target.value)}/>
            <section className="terms">
              <div className="all_check">

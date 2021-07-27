@@ -2,6 +2,8 @@
 
 .Auth_wrap{
 
+    @include media();
+    
     .title_area{
         @include textarea();
         margin-bottom: 20px;

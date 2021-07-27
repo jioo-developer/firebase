@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
-import Header from './Header'
 import { authService, firebaseInstance } from '../Firebase';
 import { Link } from 'react-router-dom';
 import "../asset/Sign.scss"
 function Sign() {
     const [id,setId] = useState(""); 
     const [password,setPassword] = useState("")
+    let [findToggle,setFIndToggle] = useState(false);
+    let [findPw,setFindPw] = useState("")
     let provider;
+
+    async function resetpw(e){
+        e.preventDefault();
+        if(findPw !==""){
+            authService.sendPasswordResetEmail(findPw).then(()=>{
+                window.alert("입력하신 메일로 비밀번호 안내드렸습니다.")
+            })
+        }
+    }
 
     async function LoginF(e){
         e.preventDefault( );
@@ -36,11 +46,11 @@ function Sign() {
     }
 
     return (
+        <>
         <div className="sign_wrap wrap">
-            <Header/>
             <h1 className="logo">
              <img src="./img/logo.svg" alt=""/>
-             <figcaption className="logo_title">사용하실 프로젝트를 입력하세요.</figcaption>
+             <figcaption className="logo_title">J.log</figcaption>
             </h1>
             <form onSubmit={LoginF} className="sign-form">
                 <input type="text" class="form-control" name="id" placeholder="아이디" required  value={id} onChange={e => setId(e.target.value)}/>
@@ -58,10 +68,35 @@ function Sign() {
                 </button>
             </div>
             <div className="assistance">
-             <button className="pw_reset ass_btn"><Link to="/Find">비밀번호 재설정</Link></button>
+             <button className="pw_reset ass_btn" onClick={()=>{
+                 setFIndToggle(true)
+             }}>비밀번호 찾기</button>
              <button className="ass_auth ass_btn"><Link to="/Auth">회원가입</Link></button>
             </div>
         </div>
+        {
+            findToggle ?
+            <>
+            <section className="find">
+                <div className="find_wrap">
+                <div className="title_area">
+                    <p>비밀번호를 잊어 버리셨나요?</p>
+                </div>
+                <form className="find-form" onSubmit={resetpw}>
+                    <input type="text" class="form-control" placeholder="이메일을 입력하세요." required  value={findPw} onChange={e => setFindPw(e.target.value)}/>
+                    <div className="btn_wrap">
+                    <div className="btn" onClick={()=>{
+                        setFIndToggle(false)
+                    }}>취소</div>
+                    <button className="btn">찾기</button>
+                    </div>
+                </form>
+                </div>
+            </section>
+            </>
+            : null
+        }
+        </>
     )
 }
 

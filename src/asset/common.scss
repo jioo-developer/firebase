@@ -1,29 +1,9 @@
 @import "mixin.scss";
 
-header{
-    @include flex();
-    @include size();
-    justify-content: space-between;
-    margin-top: 10px;
-
-    @media #{$breakpoint-mobile}{
-        display: none;
-    }
+.App{
+    background: #f9f9f9c7;
 }
 
 .wrap{
     @include reset();
 }
-
-.title_area{
-        @include textarea();
-        .close{
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            top: 50%;
-            left: 0;
-            margin-top: -10px;
-            filter: invert(1);
-        }
-    }

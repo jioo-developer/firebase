@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import Header from './Header';
-import Title from './Title';
 import { authService, db } from '../Firebase';
 import "../asset/home.scss"
 function Home() {
@@ -22,9 +20,7 @@ function Home() {
   }
     return (
         <div className="main">
-            <Header/>
-            <div className="header">
-            <Title/>
+            <header>
             <p className="title">J.log</p>
             <div className="menu">
             <input type="text" id="search_form"/>
@@ -32,7 +28,7 @@ function Home() {
             <img src="./img/profile.svg" alt="" className="profile"/>
             <img src="./img/arrow.svg" alt="" className="arrow"/>
             </div>
-            </div>
+            </header>
             <section className="post_section">
               {
                 posts.map(function(post,i){
@@ -58,6 +54,7 @@ function Home() {
                 })
               }
             </section>
+            <button className="new-post"><img src="./img/add.svg" alt=""/></button>
             <button className="btn" onClick={OnLogOut}>로그아웃</button>
         </div>
     )

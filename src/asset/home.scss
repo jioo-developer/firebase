@@ -5,11 +5,10 @@ $rgba : rgba($color, 0.05);
 
 .main{
     @include reset();
-    background: #f9f9f9c7;
-    padding: 0 25px;
-    box-sizing: border-box;
+    width: 90%;
+    position: relative;
 
-        .header{
+        header{
             @include flex();
             @include size();
             justify-content: space-between;
@@ -35,13 +34,15 @@ $rgba : rgba($color, 0.05);
         .search{
             @include btn-Reset();
             margin-right: 20px;
+            filter: brightness(0.5);
 
             img{
-                width: 22px;
+                width: 23px;
             }
         }
         
         .profile{
+            @include btn-Reset();
             width: 30px;
             border-radius: 50%;
             margin-right: 10px;
@@ -49,6 +50,7 @@ $rgba : rgba($color, 0.05);
         }
 
         .arrow{
+            @include btn-Reset();
             width: 10px;
             height: 5px;
         }
@@ -57,16 +59,19 @@ $rgba : rgba($color, 0.05);
     }
 
     .post_section{
-        margin: 0 auto;
-        background: #fff;
         margin-top: 32px;
-        box-shadow: 0 4px 16px 0 $rgba; 
 
         .post{
-            @include size();
             display: flex;
+            width: 20%;
+            height: auto;
             flex-direction: column;
             background: #fff;
+            box-shadow: 0 4px 16px 0 $rgba; 
+
+            @media #{$breakpoint-mobile}{
+                width: 100%;
+            }
 
             .thumbnail{
                 @include size();
@@ -134,6 +139,23 @@ $rgba : rgba($color, 0.05);
                         line-height: 1;
                     }
             }
+        }
+    }
+
+    .new-post{
+        @include btn-Reset();
+        position: absolute;
+        bottom: 50px;
+        right: -20px;
+        width: 65px;
+
+        @media #{$breakpoint-mobile}{
+            width: 50px;
+            bottom: 40px;
+        }
+
+        img{
+            width: 100%;
         }
     }
 }
