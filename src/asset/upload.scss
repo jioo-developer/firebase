@@ -1,0 +1,112 @@
+@import "mixin.scss";
+
+.upload{
+    @include reset();
+    width:50%;
+    margin-top: 20px;
+
+    @media #{$breakpoint-mobile}{
+        width: 90%;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        @include size();
+
+        .form-control{
+            @include size();
+        }
+
+        .titlearea{
+            font-size: 40px;
+            color: gray;
+            font-weight: 600;
+            border: 0;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            outline: 0;
+
+            &::placeholder{
+                color: rgb(177, 177, 177);
+            }
+
+            @media #{$breakpoint-mobile}{
+                font-size: 30px;
+            }
+        }
+
+        .textarea{
+            width: 100%;
+            outline: 0;
+            border: 0;
+            text-indent: 10px;
+            font-size: 18px;
+            border: 1px solid #eee;
+            box-sizing: border-box;
+            height: 600px;
+            margin-bottom: 30px;
+            padding-top: 15px;
+            resize: none;
+
+            @media #{$breakpoint-mobile}{
+                height: 350px;
+            }
+
+            &::placeholder{
+                color: rgb(177, 177, 177);
+            }
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .Attachment{
+            @include flex();
+            @include size();
+            height: 170px;
+            border: 4px dotted #ddd;
+            box-sizing: border-box;
+            color: gray;
+            border-radius: 5px;
+            margin-bottom: 30px;
+
+            @media #{$breakpoint-mobile}{
+                height: 100px;
+            }
+        }
+        
+        .image-att{
+            margin-bottom: 20px;
+        }
+    }
+
+    .cancel_wrap{
+        display: flex;
+        margin-left: auto;
+        width: 100%;
+        height: auto;
+        justify-content: space-between;
+        padding-bottom: 20px;
+
+        .exit{
+            @include btn-Reset();
+            color: #666;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .post{
+            @include btn();
+            width: 250px;
+            height: 60px;
+            background: #2a96ee;
+            color: #fff;
+
+            @media #{$breakpoint-mobile}{
+                width: 70%;
+            }
+        }
+    }
+}

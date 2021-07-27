@@ -31,7 +31,7 @@ function Auth() {
         }
     }
     return (
-        <div className="Auth_wrap wrap">
+        <div className="Auth_wrap">
             <div className="title_area">
                 <Link to="/"><img src="./img/close-24px.svg" className="close" alt=""/></Link>
                 <p>회원가입</p>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {Route} from 'react-router-dom';
-import "./asset/reset.css"
-import "./asset/common.scss"
 import Sign from './components/Sign';
 import {authService} from "./Firebase"
 import Auth from './components/Auth';

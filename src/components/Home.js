@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import { authService, db } from '../Firebase';
 import "../asset/home.scss"
 function Home() {
@@ -19,7 +19,8 @@ function Home() {
     history.push("/")
   }
     return (
-        <div className="main">
+      <div className="main">
+        <div className="in_wrap">
             <header>
             <p className="title">J.log</p>
             <div className="menu">
@@ -54,8 +55,10 @@ function Home() {
                 })
               }
             </section>
-            <button className="new-post"><img src="./img/add.svg" alt=""/></button>
+            <button className="new-post">
+              <Link to="/upload"><img src="./img/add.svg" alt=""/></Link></button>
             <button className="btn" onClick={OnLogOut}>로그아웃</button>
+        </div>
         </div>
     )
 }

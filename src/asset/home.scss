@@ -4,6 +4,9 @@ $color : #000;
 $rgba : rgba($color, 0.05);
 
 .main{
+    background: #f9f9f9c7;
+
+.in_wrap{
     @include reset();
     width: 90%;
     position: relative;
@@ -158,4 +161,5 @@ $rgba : rgba($color, 0.05);
             width: 100%;
         }
     }
+}
 }

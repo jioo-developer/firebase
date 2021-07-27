@@ -1,7 +1,7 @@
 @import "mixin.scss";
 
 .Auth_wrap{
-
+    @include reset();
     @include media();
     
     .title_area{

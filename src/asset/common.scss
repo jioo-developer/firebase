@@ -1,9 +1,0 @@
-@import "mixin.scss";
-
-.App{
-    background: #f9f9f9c7;
-}
-
-.wrap{
-    @include reset();
-}

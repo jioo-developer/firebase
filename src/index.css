@@ -53,8 +53,7 @@ a {
     color: #333333;
 }
 
-
-.in_wrap {
-    margin: 0 auto;
-    overflow: hidden;
+header,section,footer{
+    width: 100%;
+    height: auto;
 }

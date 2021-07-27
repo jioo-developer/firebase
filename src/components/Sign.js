@@ -47,7 +47,7 @@ function Sign() {
 
     return (
         <>
-        <div className="sign_wrap wrap">
+        <div className="sign_wrap">
             <h1 className="logo">
              <img src="./img/logo.svg" alt=""/>
              <figcaption className="logo_title">J.log</figcaption>
@@ -79,9 +79,7 @@ function Sign() {
             <>
             <section className="find">
                 <div className="find_wrap">
-                <div className="title_area">
                     <p>비밀번호를 잊어 버리셨나요?</p>
-                </div>
                 <form className="find-form" onSubmit={resetpw}>
                     <input type="text" class="form-control" placeholder="이메일을 입력하세요." required  value={findPw} onChange={e => setFindPw(e.target.value)}/>
                     <div className="btn_wrap">
