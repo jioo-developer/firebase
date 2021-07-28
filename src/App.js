@@ -5,6 +5,7 @@ import {authService} from "./Firebase"
 import Auth from './components/Auth';
 import Home from './components/Home';
 import Upload from './components/Upload';
+import Detail from './components/Detail';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -14,7 +15,6 @@ function App() {
       if(user) {
         setLogin(true)
         setUserObj(user)
-        console.log(user)
       } else {
         setLogin(false)
       }
@@ -33,6 +33,9 @@ function App() {
             </Route>
             <Route exact path="/upload">
               <Upload user={userObj}/>
+            </Route>
+            <Route exact path="/detail">
+              <Detail/>
             </Route>
             </>
           ) :

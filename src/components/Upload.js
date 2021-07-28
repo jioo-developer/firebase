@@ -8,6 +8,10 @@ function Upload(props) {
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
     let user = props.user
+    let time = new Date();
+    let year = time.getFullYear();
+    let month = time.getMonth();
+    let day = time.getDate();
     const history = useHistory();
 
     function onFileChange(e){
@@ -39,7 +43,8 @@ function Upload(props) {
             title : title,
             text: textarea,
             user :user.displayName,
-            이미지주소 : attchmentUrl
+            date: `${year}년${month}월${day}일`,
+            url : attchmentUrl
         }
 
         await db.collection("post").add(content).then(()=>{

@@ -83,7 +83,7 @@ function Sign() {
                 <div className="find_wrap">
                     <p>비밀번호를 잊어 버리셨나요?</p>
                 <form className="find-form" onSubmit={resetpw}>
-                    <input type="text" class="form-control" placeholder="이메일을 입력하세요." required  value={findPw} onChange={e => setFindPw(e.target.value)}/>
+                    <input type="text" className="form-control" placeholder="이메일을 입력하세요." required  value={findPw} onChange={e => setFindPw(e.target.value)}/>
                     <div className="btn_wrap">
                     <div className="btn" onClick={()=>{
                         setFIndToggle(false)

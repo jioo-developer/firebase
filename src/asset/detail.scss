@@ -1,0 +1,65 @@
+@import "mixin.scss";
+
+.detail_wrap {
+  @include reset();
+  width: 50%;
+  margin-top: 20px;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding-bottom: 40px;
+
+    h1 {
+      font-size: 40px;
+      color: rgb(52, 58, 64);
+      min-height: 40px;
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+    }
+
+    .writer_wrap {
+      @include flex();
+      justify-content: space-between;
+
+      .left_wrap {
+        display: flex;
+
+        .writer {
+          color: rgb(73, 80, 87);
+          font-weight: 500;
+          margin-right: 20px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .date {
+          color: #495057;
+        }
+      }
+
+      .right_wrap {
+        @include flex();
+        justify-content: space-between;
+
+        button {
+          @include btn-Reset();
+          color: rgb(33, 37, 41);
+          font-size: 16px;
+        }
+
+        .edit {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .content_wrap {
+    float: left;
+    @include size();
+  }
+}
