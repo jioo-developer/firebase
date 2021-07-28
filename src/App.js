@@ -14,6 +14,7 @@ function App() {
       if(user) {
         setLogin(true)
         setUserObj(user)
+        console.log(user)
       } else {
         setLogin(false)
       }

@@ -7,7 +7,7 @@ function Upload(props) {
     let [textarea,setTextarea] =  useState("");
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
-    let user = props. user
+    let user = props.user
     const history = useHistory();
 
     function onFileChange(e){
@@ -38,10 +38,11 @@ function Upload(props) {
         const content = {
             title : title,
             text: textarea,
+            user :user.displayName,
             이미지주소 : attchmentUrl
         }
 
-        await db.collection("rlawlgh388").add(content).then(()=>{
+        await db.collection("post").add(content).then(()=>{
             window.alert("포스트가 업로드 되었습니다.")
             history.push("/")
         })
@@ -63,9 +64,12 @@ function Upload(props) {
 
     function enterEvent(){
         if(window.event.keyCode == 13){
-            let height = document.querySelector(".text").clientHeight;
-            height.style.height = height + 38
+            let height = document.querySelector(".text");
+            height.style.height="auto";
+            height.style.height = height.scrollHeight + "px";
         }
+
+        //미완
     }
 
     return (

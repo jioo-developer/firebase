@@ -37,7 +37,9 @@ function Sign() {
 
     async function onGoogle(){
             provider = new firebaseInstance.auth.GoogleAuthProvider();
-             await authService.signInWithPopup(provider)
+             await authService.signInWithPopup(provider).then((result)=>{
+                //  result.user.updateProfile({displayName:result.user.displayName})
+             })
     }
 
     async function onFacebook(){

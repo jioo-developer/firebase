@@ -9,14 +9,16 @@ function Auth() {
     let [check,setCheck] = useState(false);
     let[dataCheck,setDataCheck] = useState(false);
     let[locationCheck,setLocationCheck] = useState(false);
+    let[nickname,setNickname] = useState("")
     const history = useHistory();
 
     async function SignF(e){
         e.preventDefault();
         try{
-            await authService.createUserWithEmailAndPassword(id,password).then(()=>{
+            await authService.createUserWithEmailAndPassword(id,password).then((result)=>{
                window.alert("회원가입을 환영합니다.")
                history.push("/")
+               result.user.updateProfile({displayName:nickname})
             })
         } catch(error){
             if(error.message === "The email address is badly formatted."){
@@ -38,10 +40,12 @@ function Auth() {
             </div>
             <form className="auth-form" onSubmit={SignF}>
                 <p className="id_title">이메일&nbsp;<span>*</span></p>
-                <input type="text" className="form-control" name="id" placeholder="이메일을 입력하세요." required  value={id} onChange={e => setId(e.target.value)}/>
+                <input type="text" className="form-control" name="id" id="id" placeholder="이메일을 입력하세요." required  value={id} onChange={e => setId(e.target.value)}/>
                 <p className="warning">※ 실제 사용하시는 이메일을 사용하셔야 비밀번호를 찾으실 수 있습니다.</p>
                 <p className="id_title">비밀번호&nbsp;<span>*</span></p>
                 <input type="password" className="form-control" name="password" placeholder="8자리 이상 입력하세요." required  value={password} onChange={e => setPassword(e.target.value)}/>
+                <p className="id_title">활동명 &nbsp;<span>*</span></p>
+                <input type="text" className="form-control" name="name" placeholder="활동명을 입력하세요." required value={nickname} onChange={e=>setNickname(e.target.value)}/>
            <section className="terms">
              <div className="all_check">
                 <input type="checkbox" id="all_check" onClick={e=>{

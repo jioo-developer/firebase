@@ -6,7 +6,7 @@ function Home() {
   const history = useHistory();
   let [posts,setPosts] = useState([])
   useEffect(()=>{
-    db.collection("rlawlgh388").onSnapshot((snapshot)=>{
+    db.collection("post").onSnapshot((snapshot)=>{
       let postArray = snapshot.docs.map((doc)=>({
         ...doc.data()
       }))
@@ -46,7 +46,7 @@ function Home() {
                     <div className="writer_wrap">
                       <div className="id">
                         <img src="./img/profile.svg" alt="" className="profile"/>
-                        <p className="profile_id">rlawlgh388</p>
+                        <p className="profile_id">{post.user}</p>
                       </div>
                       <p className="favorite">🤍 0</p>
                     </div>
