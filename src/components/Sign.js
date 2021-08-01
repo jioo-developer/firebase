@@ -66,7 +66,7 @@ function Sign() {
                 </button>
                 <button className="sns-btn"  name="facebook" onClick={onFacebook}>
                 <img src="./img/facebook.svg" alt=""/>    
-                <figcaption class="btn_title">페이스북으로 시작하기</figcaption>
+                <figcaption className="btn_title">페이스북으로 시작하기</figcaption>
                 </button>
             </div>
             <div className="assistance">

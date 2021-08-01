@@ -10,7 +10,7 @@ function Upload(props) {
     let user = props.user
     let time = new Date();
     let year = time.getFullYear();
-    let month = time.getMonth();
+    let month = time.getMonth()+1;
     let day = time.getDate();
     const history = useHistory();
 
@@ -43,8 +43,10 @@ function Upload(props) {
             title : title,
             text: textarea,
             user :user.displayName,
+            writer : user.uid,
             date: `${year}년${month}월${day}일`,
-            url : attchmentUrl
+            url : attchmentUrl,
+            favorite : 0
         }
 
         await db.collection("post").add(content).then(()=>{
@@ -68,9 +70,12 @@ function Upload(props) {
     }
 
     function enterEvent(){
+        let height = document.querySelector(".text");
         if(window.event.keyCode == 13){
-            let height = document.querySelector(".text");
             height.style.height="auto";
+            height.style.height = height.scrollHeight + "px";
+        } else if(window.event.keyCode == 8) {
+            height.style.height="auto";  
             height.style.height = height.scrollHeight + "px";
         }
 

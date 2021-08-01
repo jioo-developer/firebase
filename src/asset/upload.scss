@@ -1,145 +1,149 @@
 @import "mixin.scss";
 
-.upload{
-    @include reset();
-    width:50%;
-    margin-top: 20px;
+.upload {
+  @include reset();
+  width: 50%;
+  margin-top: 20px;
 
-    @media #{$breakpoint-mobile}{
-        width: 90%;
+  @media #{$breakpoint-mobile} {
+    width: 90%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    @include size();
+
+    .form-control {
+      @include size();
     }
 
-    form{
-        display: flex;
-        flex-direction: column;
-        @include size();
+    .titlearea {
+      font-size: 40px;
+      color: gray;
+      font-weight: 600;
+      border: 0;
+      margin-bottom: 25px;
+      box-sizing: border-box;
+      outline: 0;
 
-        .form-control{
-            @include size();
-        }
+      &::placeholder {
+        color: rgb(177, 177, 177);
+      }
 
-        .titlearea{
-            font-size: 40px;
-            color: gray;
-            font-weight: 600;
-            border: 0;
-            margin-bottom: 25px;
-            box-sizing: border-box;
-            outline: 0;
-
-            &::placeholder{
-                color: rgb(177, 177, 177);
-            }
-
-            @media #{$breakpoint-mobile}{
-                font-size: 30px;
-            }
-        }
-
-        .textarea{
-            width: 100%;
-            outline: 0;
-            border: 0;
-            text-indent: 10px;
-            font-size: 18px;
-            border: 1px solid #eee;
-            box-sizing: border-box;
-            height: 600px;
-            margin-bottom: 30px;
-            padding-top: 15px;
-            position: relative;
-
-            textarea{
-                @include btn-Reset();
-                width: 100%;
-                cursor: inherit;
-                resize: none;
-                overflow: hidden;
-            }
-
-            .att{
-                float: left;
-                width: 400px;
-                height: 400px;
-                padding-left: 10px;
-            }
-
-            @media #{$breakpoint-mobile}{
-                height: 350px;
-            }
-
-            &::placeholder{
-                color: rgb(177, 177, 177);
-            }
-        }
-
-        input[type="file"]{
-            display: none;
-        }
-
-        .Attachment{
-            @include flex();
-            @include size();
-            height: 170px;
-            border: 4px dotted #ddd;
-            box-sizing: border-box;
-            color: gray;
-            border-radius: 5px;
-            margin-bottom: 30px;
-            cursor: pointer;
-
-            @media #{$breakpoint-mobile}{
-                height: 100px;
-            }
-        }
-
-        #file-upload-button{
-            display: none;
-        }
-        
-        .image-att{
-            margin-bottom: 20px;
-        }
-    }
-
-    .bottom_wrap{
-        @include flex();
-        justify-content: space-between;
-        padding-bottom: 20px;
-
-    .cancel_wrap{
-        display: flex;
-        margin-left: auto;
-        width: 240px;
-        height: auto;
-        justify-content: space-between;
-
-        .post{
-            @include btn();
-            width: 112px;
-            height: 45px;
-            background:rgb(32, 201, 151);
-            color: #fff;
-
-            @media #{$breakpoint-mobile}{
-                width: 70%;
-            }
-        }
-
-        .delete{
-            @extend .post;
-            background: rgb(241, 243, 245);
-            color: #333;
-            text-align: center;
-            line-height: 45px;
-        }
-    }
-        .exit{
-            @include btn-Reset();
-            color: #666;
-            font-weight: 500;
-            font-size: 17px;
-        }
+      @media #{$breakpoint-mobile} {
+        font-size: 30px;
       }
     }
 
+    .textarea {
+      width: 100%;
+      outline: 0;
+      border: 0;
+      text-indent: 7px;
+      font-size: 18px;
+      border: 1px solid #eee;
+      box-sizing: border-box;
+      height: 600px;
+      margin-bottom: 30px;
+      padding-top: 15px;
+      position: relative;
+
+      textarea {
+        @include btn-Reset();
+        width: 100%;
+        cursor: inherit;
+        resize: none;
+        overflow: hidden;
+      }
+
+      .att {
+        float: left;
+        width: 400px;
+        height: 400px;
+        padding-left: 10px;
+
+        @media #{$breakpoint-mobile} {
+          width: 90%;
+          height: auto;
+        }
+      }
+
+      @media #{$breakpoint-mobile} {
+        height: 350px;
+      }
+
+      &::placeholder {
+        color: rgb(177, 177, 177);
+      }
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .Attachment {
+      @include flex();
+      @include size();
+      height: 170px;
+      border: 4px dotted #ddd;
+      box-sizing: border-box;
+      color: gray;
+      border-radius: 5px;
+      margin-bottom: 30px;
+      cursor: pointer;
+
+      @media #{$breakpoint-mobile} {
+        height: 100px;
+      }
+    }
+
+    #file-upload-button {
+      display: none;
+    }
+
+    .image-att {
+      margin-bottom: 20px;
+    }
+  }
+
+  .bottom_wrap {
+    @include flex();
+    justify-content: space-between;
+    padding-bottom: 20px;
+
+    .cancel_wrap {
+      display: flex;
+      margin-left: auto;
+      width: 240px;
+      height: auto;
+      justify-content: space-between;
+
+      .post {
+        @include btn();
+        width: 112px;
+        height: 45px;
+        background: rgb(32, 201, 151);
+        color: #fff;
+
+        @media #{$breakpoint-mobile} {
+          width: 70%;
+        }
+      }
+
+      .delete {
+        @extend .post;
+        background: rgb(241, 243, 245);
+        color: #333;
+        text-align: center;
+        line-height: 45px;
+      }
+    }
+    .exit {
+      @include btn-Reset();
+      color: #666;
+      font-weight: 500;
+      font-size: 17px;
+    }
+  }
+}
