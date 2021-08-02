@@ -7,11 +7,18 @@ function Detail() {
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
       let postArray = snapshot.docs.map((doc)=>({
+        id: doc.id,
         ...doc.data()
       }))
       setPosts(postArray)
     })
   },[])
+
+  async function onDelete(e){
+    e.preventDefault();
+    const ok = window.confirm("정말 삭제 하시겠습니까?");
+  }
+
     return (
             <div className="detail_wrap">
                 <header>
@@ -23,7 +30,7 @@ function Detail() {
                         </div>
                         <div className="right_wrap">
                             <button className="edit">수정</button>
-                            <button className="delete">삭제</button>
+                            <button className="delete" onClick={onDelete}>삭제</button>
                         </div>
                     </div>
                 </header>

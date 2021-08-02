@@ -1,0 +1,238 @@
+@import "mixin.scss";
+
+.profile_wrap {
+  @include reset();
+  @include size();
+  header {
+    @include flex();
+    width: 90%;
+    height: auto;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    a {
+      display: none;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .menu {
+      @include flex();
+
+      input[type="text"] {
+        display: none;
+      }
+
+      .profile {
+        @include btn-Reset();
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .arrow {
+        @include btn-Reset();
+        width: 10px;
+        height: 5px;
+      }
+    }
+  }
+
+  .content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+
+    @media #{$breakpoint-mobile} {
+      width: 90%;
+    }
+
+    .profile_area {
+      @include size();
+      display: flex;
+
+      @media #{$breakpoint-mobile} {
+        flex-direction: column;
+      }
+
+      .img_wrap {
+        @include flex();
+        width: 25%;
+        flex-direction: column;
+        border-right: 1px solid #eee;
+        padding-right: 25px;
+        box-sizing: border-box;
+
+        @media #{$breakpoint-mobile} {
+          width: 100%;
+          border: 0;
+          padding: 0;
+        }
+
+        input[type="file"] {
+          display: none;
+        }
+
+        .profileImg {
+          width: 130px;
+          height: auto;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+            border-radius: 50%;
+          }
+        }
+        .btn {
+          @include size();
+          @include flex();
+          height: 35px;
+          @include btn-Reset();
+          font-size: 16px;
+
+          @media #{$breakpoint-mobile} {
+            width: 80%;
+          }
+        }
+
+        .uploads {
+          margin: 20px 0 10px 0;
+          background: #12b886;
+          color: #fff;
+        }
+
+        .deletes {
+          color: #12b886;
+        }
+      }
+
+      .name_area {
+        padding-left: 25px;
+
+        @media #{$breakpoint-mobile} {
+          padding-left: 0;
+          @include flex();
+          flex-direction: column;
+          margin-top: 10px;
+        }
+
+        .nickname {
+          font-size: 50px;
+
+          @media #{$breakpoint-mobile} {
+            font-size: 35px;
+          }
+        }
+
+        .sub_name {
+          font-size: 20px;
+          color: #666;
+          @media #{$breakpoint-mobile} {
+            font-size: 16px;
+          }
+        }
+
+        .btn {
+          @include btn-Reset();
+          font-size: 15px;
+          margin-top: 20px;
+          color: #495057;
+
+          &:hover {
+            color: #12b886;
+            text-decoration: underline;
+          }
+        }
+        .nick_btn {
+          margin-right: 15px;
+        }
+      }
+    }
+
+    .title_edit {
+      @include size();
+      display: flex;
+      flex-direction: column;
+      margin-top: 70px;
+      border-bottom: 1px solid #eee;
+      box-sizing: border-box;
+      padding-bottom: 20px;
+
+      @media #{$breakpoint-mobile} {
+        margin-top: 35px;
+      }
+
+      .title_wrap {
+        @include size();
+        display: flex;
+
+        @media #{$breakpoint-mobile} {
+          border-top: 1px solid #eee;
+          box-sizing: border-box;
+          padding: 20px 0 0 0;
+        }
+
+        .title {
+          margin-right: 50px;
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .titleName {
+          color: #495057;
+        }
+
+        .btn {
+          margin-left: auto;
+          @include btn-Reset();
+          text-decoration: underline;
+        }
+      }
+
+      .explan {
+        @include size();
+        margin-top: 20px;
+        color: #868e96;
+        @media #{$breakpoint-mobile} {
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .withdrawal {
+      @extend .title_edit;
+      border-bottom: 1px solid #eee;
+      box-sizing: border-box;
+      padding: 22px 0 20px 0;
+      margin-top: 0;
+
+      .delete_wrap {
+        @include size();
+        display: flex;
+
+        .withdrawal_title {
+          margin-right: 50px;
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .btn {
+          width: 110px;
+          height: 35px;
+          background: rgb(255, 135, 135);
+          color: #fff;
+          border: 0;
+          outline: 0;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

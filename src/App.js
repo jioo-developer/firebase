@@ -6,6 +6,7 @@ import Auth from './components/Auth';
 import Home from './components/Home';
 import Upload from './components/Upload';
 import Detail from './components/Detail';
+import Profile from './components/Profile';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -36,6 +37,9 @@ function App() {
             </Route>
             <Route exact path="/detail">
               <Detail/>
+            </Route>
+            <Route exact path="/profile">
+              <Profile user={userObj}/>
             </Route>
             </>
           ) :
