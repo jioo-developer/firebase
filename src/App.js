@@ -36,7 +36,7 @@ function App() {
               <Upload user={userObj}/>
             </Route>
             <Route exact path="/detail">
-              <Detail/>
+              <Detail user={userObj}/>
             </Route>
             <Route exact path="/profile">
               <Profile user={userObj}/>

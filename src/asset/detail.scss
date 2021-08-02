@@ -2,21 +2,30 @@
 
 .detail_wrap {
   @include reset();
-  width: 50%;
+  width: 90%;
   margin-top: 20px;
 
+  .in_wrap {
+    width: 50%;
+  }
+
   header {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .sub_header {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid #ddd;
     box-sizing: border-box;
-    padding-bottom: 40px;
+    padding: 15px 0 30px 0;
 
     h1 {
       font-size: 40px;
       color: rgb(52, 58, 64);
       min-height: 40px;
-      margin-bottom: 32px;
+      margin-bottom: 13px;
       letter-spacing: 1px;
     }
 
@@ -61,5 +70,55 @@
   .content_wrap {
     float: left;
     @include size();
+    padding-bottom: 20px;
+
+    .text {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    figure {
+      margin-top: 20px;
+      @include size();
+      overflow: hidden;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .comment {
+      display: flex;
+      @include size();
+      flex-direction: column;
+      margin-top: 15px;
+
+      .com_title {
+        color: #495057;
+      }
+
+      textarea {
+        @include btn-Reset();
+        width: 100%;
+        height: 100px;
+        cursor: inherit;
+        resize: none;
+        overflow: hidden;
+        margin: 10px 0;
+        border: 1px solid #dadada;
+        box-sizing: border-box;
+      }
+
+      .btn {
+        @include flex();
+        padding: 0 15px;
+        margin-left: auto;
+        height: 35px;
+        @include btn-Reset();
+        font-size: 16px;
+        background: #12b886;
+        color: #fff;
+      }
+    }
   }
 }

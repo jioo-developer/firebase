@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link,useHistory } from 'react-router-dom';
 import { authService, db } from '../Firebase';
 import "../asset/home.scss"
+import "../asset/header.scss"
+import Header from './Header';
 function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
@@ -35,21 +37,15 @@ function Home(props) {
     return (
       <div className="main">
         <div className="in_wrap">
-            <header>
-            <p className="title">J.log</p>
-            <div className="menu">
-            <img src="./img/profile.svg" alt="" className="profile"/>
-            <img src="./img/arrow.svg" alt="" className="arrow"/>
-            </div>
-            </header>
+            <Header/>
             <section className="post_section">
               {
                 posts.map(function(post,i){
                   return <>
-                  <Link to="">
+                  <Link to={`/detail?id=${post.id}`}>
                   <div className="post">
                     <figure className="thumbnail">
-                      <img src="./img/test.jpg" alt=""/>
+                      <img src={post.url} alt=""/>
                     </figure>
                     <div className="text_wrap">
                       <p className="post_title">{post.title}</p>

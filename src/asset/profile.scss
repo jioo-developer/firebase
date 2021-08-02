@@ -3,44 +3,6 @@
 .profile_wrap {
   @include reset();
   @include size();
-  header {
-    @include flex();
-    width: 90%;
-    height: auto;
-    justify-content: space-between;
-    margin-top: 20px;
-
-    a {
-      display: none;
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: 500;
-      color: #333;
-    }
-
-    .menu {
-      @include flex();
-
-      input[type="text"] {
-        display: none;
-      }
-
-      .profile {
-        @include btn-Reset();
-        width: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-
-      .arrow {
-        @include btn-Reset();
-        width: 10px;
-        height: 5px;
-      }
-    }
-  }
 
   .content {
     width: 50%;
@@ -86,6 +48,17 @@
           img {
             width: 100%;
             border-radius: 50%;
+          }
+
+          .img_area {
+            width: 100%;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px dotted #ddd;
+            box-sizing: border-box;
+            @include flex();
+            text-align: center;
+            color: #555;
           }
         }
         .btn {
@@ -233,6 +206,17 @@
           cursor: pointer;
         }
       }
+    }
+
+    .end_btn {
+      @include btn-Reset();
+      margin: 10px 0 0 auto;
+      font-size: 16px;
+      background: #12b886;
+      color: #fff;
+      height: 35px;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
   }
 }

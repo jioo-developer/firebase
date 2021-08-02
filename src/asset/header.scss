@@ -1,0 +1,41 @@
+@import "mixin.scss";
+
+header {
+  @include flex();
+  width: 90%;
+  height: auto;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  a {
+    display: none;
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .menu {
+    @include flex();
+
+    input[type="text"] {
+      display: none;
+    }
+
+    .profile {
+      @include btn-Reset();
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .arrow {
+      @include btn-Reset();
+      width: 10px;
+      height: 5px;
+      display: none;
+    }
+  }
+}

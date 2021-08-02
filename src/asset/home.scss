@@ -17,50 +17,10 @@ $hoverRgb: rgba($color, 0.1);
     }
 
     header {
-      @include flex();
-      @include size();
-      justify-content: space-between;
-      margin-top: 20px;
+      width: 100%;
 
-      a {
-        display: none;
-      }
-
-      .title {
-        font-size: 24px;
-        font-weight: 500;
-        color: #333;
-      }
-
-      .menu {
-        @include flex();
-
-        input[type="text"] {
-          display: none;
-        }
-
-        .search {
-          @include btn-Reset();
-          margin-right: 20px;
-          filter: brightness(0.5);
-
-          img {
-            width: 23px;
-          }
-        }
-
-        .profile {
-          @include btn-Reset();
-          width: 40px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
-
-        .arrow {
-          @include btn-Reset();
-          width: 10px;
-          height: 5px;
-        }
+      .arrow {
+        display: block;
       }
     }
 
@@ -169,7 +129,7 @@ $hoverRgb: rgba($color, 0.1);
       position: absolute;
       bottom: 50px;
       right: -20px;
-      width: 65px;
+      width: 57px;
 
       @media #{$breakpoint-mobile} {
         width: 50px;
