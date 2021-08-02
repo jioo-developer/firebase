@@ -4,6 +4,14 @@
   @include reset();
   @include size();
 
+  .sub_menu {
+    right: 85px;
+
+    @media #{$breakpoint-mobile} {
+      right: 15px;
+    }
+  }
+
   .content {
     width: 50%;
     display: flex;

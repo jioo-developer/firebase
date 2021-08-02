@@ -8,6 +8,10 @@
 
   .in_wrap {
     width: 50%;
+
+    @media #{$breakpoint-mobile} {
+      width: 100%;
+    }
   }
 
   header {
@@ -17,6 +21,11 @@
 
   .sub_menu {
     top: 50px;
+    right: -50px;
+
+    @media #{$breakpoint-mobile} {
+      right: 0;
+    }
   }
 
   .sub_header {
@@ -25,6 +34,10 @@
     border-bottom: 1px solid #ddd;
     box-sizing: border-box;
     padding: 15px 0 30px 0;
+
+    @media #{$breakpoint-mobile} {
+      padding: 13px 0;
+    }
 
     h1 {
       font-size: 40px;
@@ -80,12 +93,20 @@
     .text {
       margin-top: 20px;
       font-size: 20px;
+
+      @media #{$breakpoint-mobile} {
+        margin-top: 15px;
+      }
     }
 
     figure {
       margin-top: 20px;
       @include size();
       overflow: hidden;
+
+      @media #{$breakpoint-mobile} {
+        margin-top: 15px;
+      }
 
       img {
         width: 100%;
@@ -102,8 +123,16 @@
         display: flex;
         justify-content: space-between;
 
+        @media #{$breakpoint-mobile} {
+          align-items: center;
+        }
+
         .com_title {
           color: #495057;
+        }
+
+        #favorite_check {
+          display: none;
         }
 
         .favorite_btn {

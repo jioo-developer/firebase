@@ -4,11 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
+import {Provider} from 'react-redux';
+import {createStore,combineReducers} from "redux"
+
+let defaults= [];
+
+function reducer(state = defaults, action){
+  if(action.type==="쿼리스트링보내기"){
+    let location = [...defaults]
+    location.push(action.payload)
+    return location
+  } else {
+    return state
+  }
+}
+
+let store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <Provider store={store}>
     <App />
+    </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

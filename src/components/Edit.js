@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
-function Upload(props) {
+import {connect} from "react-redux";
+function Edit(props) {
     let [title,setTitle] = useState("")
     let [textarea,setTextarea] =  useState("");
     let [file,setFile] = useState("");
@@ -13,6 +14,7 @@ function Upload(props) {
     let month = time.getMonth()+1;
     let day = time.getDate();
     const history = useHistory();
+    let locationEdit = props.reducer
 
     function onFileChange(e){
         const theFile = e.target.files[0];
@@ -110,4 +112,10 @@ function Upload(props) {
     )
 }
 
-export default Upload
+function location공장(state){
+    return{
+        reducer : state
+    }
+}
+
+export default connect(location공장)(Edit);
