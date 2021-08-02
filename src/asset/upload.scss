@@ -3,7 +3,7 @@
 .upload {
   @include reset();
   width: 50%;
-  margin-top: 20px;
+  margin-top: 10px;
 
   @media #{$breakpoint-mobile} {
     width: 90%;

@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Upload from './components/Upload';
 import Detail from './components/Detail';
 import Profile from './components/Profile';
+import Header from './components/Header';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -30,7 +31,7 @@ function App() {
           Login ? (
             <>
             <Route exact path="/">
-              <Home/>
+              <Home user={userObj}/>
             </Route>
             <Route exact path="/upload">
               <Upload user={userObj}/>

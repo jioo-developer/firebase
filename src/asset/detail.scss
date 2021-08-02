@@ -4,6 +4,7 @@
   @include reset();
   width: 90%;
   margin-top: 20px;
+  position: relative;
 
   .in_wrap {
     width: 50%;
@@ -12,6 +13,10 @@
   header {
     width: 100%;
     margin-top: 0;
+  }
+
+  .sub_menu {
+    top: 50px;
   }
 
   .sub_header {
@@ -93,8 +98,28 @@
       flex-direction: column;
       margin-top: 15px;
 
-      .com_title {
-        color: #495057;
+      .favorite_wrap {
+        display: flex;
+        justify-content: space-between;
+
+        .com_title {
+          color: #495057;
+        }
+
+        .favorite_btn {
+          @include flex();
+          border: 1px solid #ddd;
+          box-sizing: border-box;
+          padding: 5px 10px;
+          border-radius: 3px;
+          cursor: pointer;
+
+          &:hover {
+            background: #12b886;
+            color: #fff;
+            border-radius: 5px;
+          }
+        }
       }
 
       textarea {

@@ -8,21 +8,7 @@ function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
   let [favoriteBtn,setFavoriteBtn] = useState(false)
-
-  function setCookie(name,value,expiredays){
-    let today = new Date();
-    today.setDate(today.getDate() + expiredays);
-    document.cookie =  `${name} = ${escape(value)}; expires =${today.toUTCString()};`
-  }
-
-  useEffect(()=>{
-    let cookieCheck = document.cookie
-    if(cookieCheck === "Cookie=done"){
-      setFavoriteBtn(true)
-    } else {
-      setFavoriteBtn(false)
-    }
-  },[])
+  let user = props.user
 
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -37,7 +23,7 @@ function Home(props) {
     return (
       <div className="main">
         <div className="in_wrap">
-            <Header/>
+            <Header user={user}/>
             <section className="post_section">
               {
                 posts.map(function(post,i){
@@ -60,13 +46,7 @@ function Home(props) {
                       {
                         favoriteBtn ? <p className="favorite">❤{post.favorite}</p> : (
                           <>
-                      <p className="favorite" onClick={()=>{
-                        db.collection("post").doc(post.id).update({
-                          favorite:post.favorite+1
-                        })
-                        setCookie("Cookie","done",1)
-                        setFavoriteBtn(true)
-                        }}>❤{post.favorite}</p>                          
+                      <p className="favorite">❤{post.favorite}</p>                          
                           </>
                         )
                       }

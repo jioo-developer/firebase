@@ -33,7 +33,7 @@ function Profile(props) {
 
     return (
         <div className="profile_wrap">
-            <Header/>
+            <Header user={user}/>
             <section className="content">
                 <div className="profile_area">
                     <div className="img_wrap">
@@ -49,7 +49,6 @@ function Profile(props) {
                     <div className="name_area">
                         <b className="nickname">테스터</b>
                         <p className="sub_name">프론트엔드가 좋은 웹쟁이</p>
-                        <button className="btn nick_btn">닉네임 수정</button>
                         <button className="btn comment_btn">코멘트 수정</button>
                     </div>
                 </div>

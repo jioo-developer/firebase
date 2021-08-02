@@ -1,9 +1,5 @@
 @import "mixin.scss";
 
-$color: #000;
-$rgba: rgba($color, 0.05);
-$hoverRgb: rgba($color, 0.1);
-
 .main {
   background: #f9f9f9c7;
 
@@ -11,6 +7,7 @@ $hoverRgb: rgba($color, 0.1);
     @include reset();
     width: 90%;
     position: relative;
+    align-items: inherit;
 
     @media #{$breakpoint-mobile} {
       height: auto;
@@ -18,10 +15,6 @@ $hoverRgb: rgba($color, 0.1);
 
     header {
       width: 100%;
-
-      .arrow {
-        display: block;
-      }
     }
 
     .post_section {
@@ -130,6 +123,11 @@ $hoverRgb: rgba($color, 0.1);
       bottom: 50px;
       right: -20px;
       width: 57px;
+      transition-duration: 0.4s;
+
+      &:hover {
+        bottom: 67px;
+      }
 
       @media #{$breakpoint-mobile} {
         width: 50px;
