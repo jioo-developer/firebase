@@ -8,6 +8,7 @@ import Upload from './components/Upload';
 import Detail from './components/Detail';
 import Profile from './components/Profile';
 import Edit from './components/Edit';
+import Header from './components/Header';
 function App() {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -31,7 +32,7 @@ function App() {
           Login ? (
             <>
             <Route exact path="/">
-              <Home user={userObj}/>
+              <Home/>
             </Route>
             <Route exact path="/upload">
               <Upload user={userObj}/>
@@ -51,7 +52,6 @@ function App() {
             <Route exact path="/">
               <Sign/>
             </Route>
-
             <Route exact path="/Auth">
               <Auth/>
             </Route>

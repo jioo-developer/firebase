@@ -8,7 +8,6 @@ function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
   let [favoriteBtn,setFavoriteBtn] = useState(false)
-  let user = props.user
 
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -23,7 +22,7 @@ function Home(props) {
     return (
       <div className="main">
         <div className="in_wrap">
-            <Header user={user}/>
+            <Header/>
             <section className="post_section">
               {
                 posts.map(function(post,i){

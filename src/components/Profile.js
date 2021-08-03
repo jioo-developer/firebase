@@ -6,7 +6,11 @@ import "../asset/header.scss"
 
 function Profile(props) {
     let [file,setFile] = useState("");
+    let [title,setTitle] = useState("")
+    let [comment,setcomment] = useState("")
     let [fileName,setFileName] = useState("")
+    let [commentEdit,setCommentEdit] = useState(false)
+    let [NameEdit,setNameEdit] = useState(false)
     let user = props.user
 
     async function onFileChange(e){
@@ -31,9 +35,11 @@ function Profile(props) {
         document.querySelector("#img_check").value=null;
     }
 
+    async function comEdit(e){}
+
     return (
         <div className="profile_wrap">
-            <Header user={user}/>
+            <Header/>
             <section className="content">
                 <div className="profile_area">
                     <div className="img_wrap">
@@ -47,16 +53,28 @@ function Profile(props) {
                             <button className="deletes btn" onClick={clearPhoto}>이미지 제거</button>
                     </div>
                     <div className="name_area">
-                        <b className="nickname">테스터</b>
-                        <p className="sub_name">프론트엔드가 좋은 웹쟁이</p>
-                        <button className="btn comment_btn">코멘트 수정</button>
+                        <b className="nickname">{user.displayName}</b>
+                        {
+                            commentEdit ? <input type="text"  className="form-control" onChange={e=>setTitle(e.target.value)}/> : <p className="sub_name">프론트엔드가 좋은 웹쟁이</p>
+                        }
+                        {
+                            commentEdit ? <button className="btn comment_btn" onClick={comEdit}>수정완료</button> : <button className="btn comment_btn" onClick={()=>{
+                                setCommentEdit(true)
+                            }}>코멘트 수정</button>
+                        }
                     </div>
                 </div>
                 <div className="title_edit">
                     <div className="title_wrap">
                         <p className="title">블로그 제목</p>
-                        <p className="titleName">jioo.log</p>
-                        <button className="btn">수정</button>
+                        {
+                            NameEdit ? <input type="text" className="form-control"/> : <p className="titleName">{user.displayName}</p>
+                        }
+                        <button className="btn" onClick={()=>{
+                            setNameEdit(!NameEdit)
+                        }}>{
+                            NameEdit ? "완료" : "수정"
+                        }</button>
                     </div>
                     <p className="explan">개인 페이지의 좌측 상단에 나타나는 페이지 제목입니다.</p>
                 </div>

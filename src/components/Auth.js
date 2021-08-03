@@ -1,17 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../asset/auth.scss"
-import { authService } from '../Firebase';
+import { authService, db } from '../Firebase';
 import {Link,useHistory} from 'react-router-dom';
 
 function Auth() {
     let [id,setId] = useState("");
     let [password,setPassword] = useState("");
     let [check,setCheck] = useState(false);
-    let[dataCheck,setDataCheck] = useState(false);
-    let[locationCheck,setLocationCheck] = useState(false);
+    let[checkLength,setCheckLength] = useState(0)
     let[nickname,setNickname] = useState("")
     const history = useHistory();
-
+    const authData = [{id:"auth",text:"회원가입및 운영약관 동의 (필수)"},{id:"data",text:"개인정보 수집 및 동의 (필수)"},{id:"location",text:"위치정보 이용약관 동의 (선택)"}]
+    useEffect(()=>{
+        let all_check = document.getElementById("all_check")
+        let checks = document.querySelector("#all_check").nextSibling;
+        if(checkLength === 2){
+            checks.style.backgroundImage="url('')";
+            setCheck(true)
+         } else if(checkLength === 3){
+             checks.style.backgroundImage="url('./img/checked.svg')";
+             checks.style.border=0
+             all_check.checked = true
+        } else {
+            checks.style.backgroundImage="url('')";
+            checks.style.border="1px solid #eee"
+            all_check.checked = false
+            setCheck(false)
+        }
+    },[checkLength])
     async function SignF(e){
         e.preventDefault();
         try{
@@ -20,6 +36,8 @@ function Auth() {
                history.push("/")
                result.user.updateProfile({displayName:nickname})
             })
+
+            await db.collection("profile").doc(nickname).set({comment : ""})
         } catch(error){
             if(error.message === "The email address is badly formatted."){
                 window.alert("올바른 이메일 형식이 아닙니다.")
@@ -32,6 +50,43 @@ function Auth() {
             }
         }
     }
+
+    function checkSelectAll(e){
+        let target = e.target.nextSibling;
+        if(e.target.checked){
+            target.style.backgroundImage="url('./img/checked.svg')"
+            target.style.border=0
+                setCheckLength(checkLength+1)
+        } else {
+            target.style.backgroundImage="url('')"
+            target.style.border="1px solid #eee"
+            setCheckLength(checkLength-1)
+        }
+
+    }
+
+    function allCheck(e){
+        let subCheck = document.querySelectorAll("input[name='sub_check']")
+        if(e.target.checked){
+            setCheck(true)
+            subCheck.forEach((checkbox)=>{
+            checkbox.checked = true
+            e.target.nextSibling.style.backgroundImage="url('./img/checked.svg')"
+            e.target.nextSibling.style.border=0
+            checkbox.nextSibling.style.backgroundImage="url('./img/checked.svg')"
+            checkbox.nextSibling.style.border=0
+        })
+        } else {
+            setCheck(false)
+            subCheck.forEach((checkbox)=>{
+            checkbox.checked = false
+            e.target.nextSibling.style.backgroundImage="url('')"
+            checkbox.nextSibling.style.backgroundImage="url('')"
+            checkbox.nextSibling.style.border="1px solid #eee"
+        })
+        }
+    }
+
     return (
         <div className="Auth_wrap">
             <div className="title_area">
@@ -48,63 +103,24 @@ function Auth() {
                 <input type="text" className="form-control" name="name" placeholder="활동명을 입력하세요." required value={nickname} onChange={e=>setNickname(e.target.value)}/>
            <section className="terms">
              <div className="all_check">
-                <input type="checkbox" id="all_check" onClick={e=>{
-                    let target = e.target.nextSibling;
-                    if(e.target.checked){
-                        setCheck(true)
-                        target.style.backgroundImage="url('./img/checked.svg')"
-                        target.style.border=0
-                    } else {
-                        setCheck(false)
-                        target.style.backgroundImage="url('')"
-                        target.style.border="1px solid #eee"
-                    }
-                }}/>
+                <input type="checkbox" id="all_check" onClick={allCheck}/>
                 <label htmlFor="all_check" className="check"></label>
                 <p className="check_text">전체 약관 동의</p>
              </div>
              <ul className="check_wrap">
-                 <li>
-                    <input type="checkbox" id="auth_check" onClick={e=>{
-                    let target = e.target.nextSibling;
-                        if(e.target.checked){
-                            setDataCheck(true)
-                            target.style.backgroundImage="url('./img/checked.svg')"
-                            target.style.border=0
-                        } else {
-                            setDataCheck(false)
-                            target.style.backgroundImage="url('')"
-                            target.style.border="1px solid #eee"
-                        }
-                    }}/>
-                    <label htmlFor="auth_check" className="check"></label>
-                    <p className="check_text">회원가입및 운영약관 동의 (필수)</p>
-                </li>
-                 <li>
-                    <input type="checkbox" id="data_check" onClick={e=>{
-                        let target = e.target.nextSibling;
-                        if(e.target.checked){
-                            setLocationCheck(true)
-                            target.style.backgroundImage="url('./img/checked.svg')"
-                            target.style.border=0
-                        } else{
-                            setLocationCheck(false)
-                            target.style.backgroundImage="url('')"
-                            target.style.border="1px solid #eee"
-                        }
-                    }}/>
-                    <label htmlFor="data_check" className="check"></label>
-                    <p className="check_text">개인정보 수집 및 동의 (필수)</p>
-                </li>
-                 <li>
-                    <input type="checkbox" id="location_check"/>
-                    <label htmlFor="location_check" className="check"></label>
-                    <p className="check_text">위치정보 이용약관 동의 (선택)</p>
-                </li>
+                 {
+                     authData.map(function(data,i){
+                         return <li key={i}>
+                             <input type="checkbox" id={`${data.id}_check`} name="sub_check" onClick={checkSelectAll}/>
+                             <label htmlFor={`${data.id}_check`} className="check"></label>
+                             <p className="check_text">{data.text}</p>
+                         </li>
+                     })
+                 }
              </ul>
             </section>
             {
-                 check || dataCheck && locationCheck ? <button className="btn">회원가입</button> : <div className="un_btn">회원가입</div>
+                 check  ? <button className="btn">회원가입</button> : <div className="un_btn">회원가입</div>
              }
             </form>
         </div>

@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link, useHistory} from 'react-router-dom';
 import { authService } from '../Firebase';
 function Header(props) {
     let [navToggle,setNavToggle] = useState(false)
+    const [userObj,setUserObj] = useState(null)
     const history = useHistory();
+    let user = userObj.displayName
 
+    useEffect(()=>{
+        authService.onAuthStateChanged((user)=>{
+            if(user) {
+                setUserObj(user)
+            }
+        })
+    },[])
+    
     function logout(){
         authService.signOut();
         history.push("/")
@@ -12,7 +22,7 @@ function Header(props) {
     return (
         <>
             <header>
-                <p className="title"><Link to="/">{props.user.displayName}.log</Link></p>
+                <p className="title"><Link to="/">{user}.log</Link></p>
                 <div className="menu" onClick={()=>{
                     setNavToggle(!navToggle)
                 }}>

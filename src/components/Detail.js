@@ -46,7 +46,7 @@ function Detail(props) {
   }
     return (
             <div className="detail_wrap">
-              <Header user={user}/>
+              <Header/>
               <div className="in_wrap">
                 <section className="sub_header">
                     <h1>{posts.title}</h1>

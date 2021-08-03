@@ -118,6 +118,12 @@
           }
         }
 
+        .form-control {
+          @include input-text();
+          width: 100%;
+          margin-bottom: 0;
+        }
+
         .btn {
           @include btn-Reset();
           font-size: 15px;
@@ -147,6 +153,7 @@
       .title_wrap {
         @include size();
         display: flex;
+        align-items: center;
 
         @media #{$breakpoint-mobile} {
           border-top: 1px solid #eee;
@@ -162,6 +169,12 @@
 
         .titleName {
           color: #495057;
+        }
+
+        .form-control {
+          @include input-text();
+          width: 70%;
+          margin-bottom: 0;
         }
 
         .btn {
