@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link,useHistory } from 'react-router-dom';
-import { authService, db } from '../Firebase';
+import { db } from '../Firebase';
 import "../asset/home.scss"
 import "../asset/header.scss"
 import Header from './Header';

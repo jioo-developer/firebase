@@ -71,10 +71,10 @@ function Upload(props) {
 
     function enterEvent(){
         let height = document.querySelector(".text");
-        if(window.event.keyCode == 13){
+        if(window.event.keyCode === 13){
             height.style.height="auto";
             height.style.height = height.scrollHeight + "px";
-        } else if(window.event.keyCode == 8) {
+        } else if(window.event.keyCode === 8) {
             height.style.height="auto";  
             height.style.height = height.scrollHeight + "px";
         }

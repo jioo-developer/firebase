@@ -7,7 +7,6 @@ import Home from './components/Home';
 import Upload from './components/Upload';
 import Detail from './components/Detail';
 import Profile from './components/Profile';
-import Header from './components/Header';
 import Edit from './components/Edit';
 function App() {
   const [init,setInit] = useState(false);
@@ -44,7 +43,7 @@ function App() {
               <Profile user={userObj}/>
             </Route>
             <Route exact path="/edit">
-              <Edit/>
+              <Edit user={userObj}/>
             </Route>
             </>
           ) :
