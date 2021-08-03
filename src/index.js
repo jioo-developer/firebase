@@ -5,9 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
 import {Provider} from 'react-redux';
-import {createStore} from "redux"
+import {combineReducers, createStore} from "redux"
 
 let defaults= [];
+
+let displayNames = []
 
 function reducer(state = defaults, action){
   if(action.type==="쿼리스트링보내기"){
@@ -19,7 +21,17 @@ function reducer(state = defaults, action){
   }
 }
 
-let store = createStore(reducer)
+function reducer2(state = displayNames, action2){
+  if(action2.type==="활동명"){
+    let names = [...displayNames]
+    names.push(action2.payload2)
+    return names
+  } else {
+    return state
+  }
+}
+
+let store = createStore(combineReducers({reducer,reducer2}))
 
 ReactDOM.render(
   <React.StrictMode>

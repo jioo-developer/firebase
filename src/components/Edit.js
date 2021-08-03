@@ -10,6 +10,7 @@ function Edit(props) {
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
     let [deleteUrl,setDeleteUrl] =useState("")
+    let [checkDelete,setcheckDelete] = useState(false)
     let user = props.user
     const history = useHistory();
     let locationEdit = props.reducer[0]
@@ -20,6 +21,10 @@ function Edit(props) {
       setPosts(postArray)
     })
   },[])
+
+  useEffect(()=>{
+    setcheckDelete(true)
+  },[deleteUrl])
 
     function onFileChange(e){
         const theFile = e.target.files[0];
@@ -40,7 +45,7 @@ function Edit(props) {
     async function post(e){
         e.preventDefault();
         let attchmentUrl =""; //이미지 추출경로 변수
-        if(file !== ""){
+        if(file !== "" && file !== null){
             const fileRef = storageService.ref().child(`${user.id}/${fileName.name}`)
             const response = await fileRef.putString(file,"data_url");
             attchmentUrl = await response.ref.getDownloadURL();
@@ -52,7 +57,9 @@ function Edit(props) {
             url : attchmentUrl
         }
         await db.doc(`post/${locationEdit}`).update(content).then(()=>{
-            storageService.refFromURL(deleteUrl).delete();
+            if(checkDelete){
+                storageService.refFromURL(deleteUrl).delete();
+            }
             history.push(`/detail?id=${locationEdit}`)
             window.alert("수정이 완료되었습니다.")
         })
@@ -85,9 +92,9 @@ function Edit(props) {
     return (
         <div className="upload">
             <form onSubmit={post}>
-                <input type="text" className="form-control titlearea" id="title" placeholder={posts.title}  maxLength={120} onChange={e=>setTitle(e.target.value)}/>
+                <input type="text" className="form-control titlearea" id="title" placeholder={posts.title === "" ? "제목을 입력해주세요" : posts.title}  maxLength={120} onChange={e=>setTitle(e.target.value)}/>
                 <div className="textarea">
-                    <textarea className="text" placeholder={posts.text} onKeyUp={enterEvent} onChange={e=>setTextarea(e.target.value)}></textarea>
+                    <textarea className="text" placeholder={posts.text === "" ? "당신의 이야기를 입력해주세요" : posts.text} onKeyUp={enterEvent} onChange={e=>setTextarea(e.target.value)}></textarea>
                     <figure>
                     {
                         posts.url !== "" ? <img src={posts.url} className="att edit_att" alt=""/> : ""
@@ -115,7 +122,7 @@ function Edit(props) {
 
 function location공장(state){
     return{
-        reducer : state
+        reducer : state.reducer
     }
 }
 

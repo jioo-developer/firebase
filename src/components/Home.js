@@ -7,7 +7,6 @@ import Header from './Header';
 function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
-  let [favoriteBtn,setFavoriteBtn] = useState(false)
 
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -42,13 +41,7 @@ function Home(props) {
                         <img src="./img/profile.svg" alt="" className="profile"/>
                         <p className="profile_id">{post.user}</p>
                       </div>
-                      {
-                        favoriteBtn ? <p className="favorite">❤{post.favorite}</p> : (
-                          <>
-                      <p className="favorite">❤{post.favorite}</p>                          
-                          </>
-                        )
-                      }
+                      <p className="favorite">❤{post.favorite}</p> 
                     </div>
                   </div>
                   </Link>

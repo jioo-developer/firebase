@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import { authService } from '../Firebase';
 function Header(props) {
     let [navToggle,setNavToggle] = useState(false)
-    const [userObj,setUserObj] = useState(null)
+    let [nameLoading,setNameLoading] = useState(false)
     const history = useHistory();
-    let user = userObj.displayName
-
-    useEffect(()=>{
-        authService.onAuthStateChanged((user)=>{
-            if(user) {
-                setUserObj(user)
-            }
-        })
-    },[])
-    
     function logout(){
         authService.signOut();
         history.push("/")
     }
+
+    useEffect(()=>{
+        setNameLoading(true)
+    },[])
+    
     return (
         <>
             <header>
-                <p className="title"><Link to="/">{user}.log</Link></p>
+                {
+                    nameLoading ? <p className="title"><Link to="/">{props.receive[0].displayName}.log</Link></p> : ""
+                }
                 <div className="menu" onClick={()=>{
                     setNavToggle(!navToggle)
                 }}>
@@ -44,4 +42,10 @@ function Header(props) {
     )
 }
 
-export default Header
+function name받기(state){
+    return {
+        receive : state.reducer2
+    }
+}
+
+export default connect(name받기)(Header);

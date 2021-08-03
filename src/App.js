@@ -8,8 +8,8 @@ import Upload from './components/Upload';
 import Detail from './components/Detail';
 import Profile from './components/Profile';
 import Edit from './components/Edit';
-import Header from './components/Header';
-function App() {
+import { connect } from 'react-redux';
+function App(props) {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
   const [userObj,setUserObj] = useState(null)
@@ -18,6 +18,7 @@ function App() {
       if(user) {
         setLogin(true)
         setUserObj(user)
+        props.dispatch({type:"활동명",payload2:user})
       } else {
         setLogin(false)
       }
@@ -62,4 +63,10 @@ function App() {
   );
 }
 
-export default App;
+function name보내기(state){
+  return {
+    goName : state.reducer2
+  }
+}
+
+export default connect(name보내기)(App);

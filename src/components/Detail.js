@@ -98,7 +98,7 @@ function Detail(props) {
 
 function location공장(state){
   return{
-    reducer:state
+    reducer:state.reducer
   }
 }
 
