@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "../asset/profile.scss"
 import { db, storageService } from '../Firebase';
+import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import "../asset/header.scss"
 
@@ -8,16 +9,23 @@ function Profile(props) {
     let user = props.user
     let [file,setFile] = useState("");
     let [title,setTitle] = useState("")
-    let [comment,setcomment] = useState("")
     let [fileName,setFileName] = useState("")
-    let [commentEdit,setCommentEdit] = useState(false)
     let [NameEdit,setNameEdit] = useState(false)
+    let [uploadCheck,setUploadCheck] = useState(false)
+    let [deleteProfile,setDeleteProfile] = useState("")
+    let [preview,setpreview] = useState(false)
+    let profileUrl= "";
+    const history = useHistory();
 
     useEffect(()=>{
         setTitle(user.displayName)
+        setDeleteProfile(user.photoURL)
+        console.log(user.photoURL)
     },[])
 
     async function onFileChange(e){
+        setpreview(true)
+        setUploadCheck(true)
         const theFile = e.target.files[0];
         setFileName(theFile)
         const reader = new FileReader();
@@ -27,16 +35,15 @@ function Profile(props) {
             } = finished
 
             setFile(result)
-        }
-            if(theFile){
-                reader.readAsDataURL(theFile)
             }
-
+            reader.readAsDataURL(theFile)
     }
     
-    function clearPhoto(){
+    async function clearPhoto(){
         setFile(null)
         document.querySelector("#img_check").value=null;
+        storageService.refFromURL(deleteProfile).delete();
+        await user.updateProfile({photoURL:"https://firebasestorage.googleapis.com/v0/b/retry-b4e10.appspot.com/o/%ED%85%8C%EC%8A%A4%ED%84%B04-profileImg%2Fdefault.svg?alt=media&token=36af18d0-c303-42d5-a190-41bf0d9f9a91"})
     }
 
     async function NameF(){
@@ -44,6 +51,20 @@ function Profile(props) {
         await user.updateProfile({displayName : title}).then(()=>{
             setNameEdit(!NameEdit)
         })
+    }
+
+    async function uploadEnd(){
+        const fileRef = storageService.ref().child(`${title}-profileImg/${fileName.name}`)
+        const response = await fileRef.putString(file,"data_url");
+        profileUrl = await response.ref.getDownloadURL();
+        
+        await user.updateProfile({photoURL : profileUrl,}).then(()=>{
+            storageService.refFromURL(deleteProfile).delete();
+            setpreview(false)
+            setUploadCheck(false)
+            window.alert("프로필 변경이 완료되었습니다.")
+            history.push("/")
+        })    
     }
 
     return (
@@ -55,10 +76,12 @@ function Profile(props) {
                         <input type="file" accept="image/*" id="img_check" onChange={onFileChange}/>
                         <figure className="profileImg">
                             {
-                                file ? <img src={file} width="130px" height="auto"/> : <img src="./img/default.svg" alt=""/>
+                                preview ? <img src={file} width="130px" height="135px"/> : <img src={user.photoURL} width="130px" height="135px"/>
                             }
                         </figure>
-                            <label htmlFor="img_check" className="uploads btn">이미지 업로드</label>
+                            {
+                                uploadCheck ? <div className="uploads btn" onClick={uploadEnd}>바꾸기 완료</div> : <label htmlFor="img_check" className="uploads btn" >이미지 업로드</label>
+                            }
                             <button className="deletes btn" onClick={clearPhoto}>이미지 제거</button>
                     </div>
                     <div className="name_area">

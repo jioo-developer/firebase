@@ -9,6 +9,7 @@ import Detail from './components/Detail';
 import Profile from './components/Profile';
 import Edit from './components/Edit';
 import { connect } from 'react-redux';
+import Notice from './components/Notice';
 function App(props) {
   const [init,setInit] = useState(false);
   const [Login,setLogin] = useState(false);
@@ -46,6 +47,9 @@ function App(props) {
             </Route>
             <Route exact path="/edit">
               <Edit user={userObj}/>
+            </Route>
+            <Route exact path="/notice">
+              <Notice/>
             </Route>
             </>
           ) :

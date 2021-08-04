@@ -72,7 +72,7 @@ function Sign() {
             <div className="assistance">
              <button className="pw_reset ass_btn" onClick={()=>{
                  setFIndToggle(true)
-             }}>비밀번호 찾기</button>
+             }}>비밀번호 변경&amp;찾기</button>
              <button className="ass_auth ass_btn"><Link to="/Auth">회원가입</Link></button>
             </div>
         </div>
@@ -88,7 +88,7 @@ function Sign() {
                     <div className="btn" onClick={()=>{
                         setFIndToggle(false)
                     }}>취소</div>
-                    <button className="btn">찾기</button>
+                    <button className="btn">완료</button>
                     </div>
                 </form>
                 </div>

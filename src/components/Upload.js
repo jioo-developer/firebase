@@ -8,6 +8,7 @@ function Upload(props) {
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
     let user = props.user
+    let attchmentUrl ="";
     let time = new Date();
     let year = time.getFullYear();
     let month = time.getMonth()+1;
@@ -32,12 +33,11 @@ function Upload(props) {
 
     async function post(e){
         e.preventDefault();
-        let attchmentUrl =""; //이미지 추출경로 변수
-        if(file !== ""){
-            const fileRef = storageService.ref().child(`${user.id}/${fileName.name}`)
+        if(file !== "" ){
+            const fileRef = storageService.ref().child(`${user.displayName}/${fileName.name}`)
             const response = await fileRef.putString(file,"data_url");
             attchmentUrl = await response.ref.getDownloadURL();
-        }
+        } 
 
         const content = {
             title : title,
@@ -53,11 +53,6 @@ function Upload(props) {
             window.alert("포스트가 업로드 되었습니다.")
             history.push("/")
         })
-    }
-
-    function clearPhoto(){
-        setFile(null)
-        document.querySelector(".file-form").value=null;
     }
 
     function reset(){
@@ -101,7 +96,6 @@ function Upload(props) {
                     history.push("/")
                 }}>← &nbsp;나가기</div>
             <div className="cancel_wrap">
-                <div className="delete" onClick={clearPhoto}>파일삭제</div>
                 <button type="submit" className="post" onClick={reset}>글작성</button>
             </div>
             </div>

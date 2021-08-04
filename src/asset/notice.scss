@@ -1,0 +1,109 @@
+@import "_mixin.scss";
+
+.notice_wrap {
+  @include reset();
+  width: 90%;
+
+  header {
+    width: 100%;
+  }
+
+  .post_area {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .in_wrap {
+      float: left;
+      width: 100%;
+      border-bottom: 1px solid #eee;
+      box-sizing: border-box;
+      padding-bottom: 10px;
+      margin-top: 30px;
+
+      .notice {
+        display: flex;
+        width: 55%;
+        justify-content: space-around;
+        align-items: center;
+        height: auto;
+        margin: 0 auto;
+
+        @media #{$breakpoint-mobile} {
+          width: 100%;
+          flex-direction: column;
+        }
+
+        figure {
+          @include flex();
+          width: 20%;
+
+          @media #{$breakpoint-mobile} {
+            width: 40%;
+          }
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .text_wrap {
+          display: flex;
+          width: 75%;
+          flex-direction: column;
+
+          .notice_title {
+            font-size: 35px;
+            font-weight: 500;
+            margin-bottom: 15px;
+
+            @media #{$breakpoint-mobile} {
+              text-align: center;
+              font-size: 25px;
+            }
+          }
+
+          .notice_text {
+            font-size: 18px;
+            color: #495057;
+
+            @media #{$breakpoint-mobile} {
+              text-align: center;
+              font-size: 15px;
+            }
+          }
+
+          .tag {
+            margin-top: 25px;
+            display: flex;
+
+            .tag_in {
+              @include flex();
+              width: 100px;
+              height: 40px;
+              border-radius: 10px;
+              background: #f2f3f5;
+              color: #379f84;
+
+              @media #{$breakpoint-mobile} {
+                width: 100%;
+              }
+            }
+          }
+
+          .post_date {
+            @include size();
+            margin-top: 20px;
+            @media #{$breakpoint-mobile} {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .in_wrap0 {
+      margin-top: 25px;
+    }
+  }
+}

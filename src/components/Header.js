@@ -21,20 +21,27 @@ function Header(props) {
         <>
             <header>
                 {
-                    nameLoading ? <p className="title"><Link to="/">{props.receive[0].displayName}.log</Link></p> : "로그인정보를 가져오는중..."
+                    nameLoading ? (
+                        <>
+                        <p className="title"><Link to="/">{props.receive[0].displayName}.log</Link></p> 
+                        <div className="menu" onClick={()=>{
+                            setNavToggle(!navToggle)
+                        }}>
+                        <img src={props.receive[0].photoURL} alt="" className="profile"/>
+                        <img src="./img/arrow.svg" alt="" className="arrow"/>
+                        </div>
+                        </>
+                    )
+                    
+                    : "로그인정보를 가져오는중..."
                 }
-                <div className="menu" onClick={()=>{
-                    setNavToggle(!navToggle)
-                }}>
-                <img src="./img/default.svg" alt="" className="profile"/>
-                <img src="./img/arrow.svg" alt="" className="arrow"/>
-            </div>
             </header>
             {
                 navToggle ? (
                     <>
                     <ul className="sub_menu">
                     <li><Link to="/profile">설정</Link></li>
+                    <li><Link to="notice">공지사항</Link></li>
                     <li onClick={logout}>로그아웃</li>
                     </ul> 
                     </>

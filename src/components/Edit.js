@@ -11,6 +11,7 @@ function Edit(props) {
     let [changeFile,setChangeFile] = useState(false)
     let [title,setTitle] = useState("")
     let [textarea,setTextarea] =  useState("");
+    let [deleteImg,setDeleteImg] = useState("")
     let user = props.user
     const history = useHistory();
     let locationEdit = props.reducer[0]
@@ -20,10 +21,12 @@ function Edit(props) {
       let postArray = ({...snapshot.data()})
       setPosts(postArray)
     })
+    document.querySelector(".cancel_wrap").style.width="240px"
   },[])
   useEffect(()=>{
     setTitle(posts.title)
     setTextarea(posts.text)
+    setDeleteImg(posts.url)
   },[posts])
   
      useEffect(()=>{
@@ -83,7 +86,7 @@ function Edit(props) {
         e.preventDefault();
         let attchmentUrl = "";
         if(file !== ""){
-            const fileRef = storageService.ref().child(`${user.id}/${fileName.name}`)
+            const fileRef = storageService.ref().child(`${user.displayName}/${fileName.name}`)
             const response = await fileRef.putString(file,"data_url");
             attchmentUrl = await response.ref.getDownloadURL();
         }
@@ -95,6 +98,7 @@ function Edit(props) {
         }
 
         await db.doc(`post/${locationEdit}`).update(content).then(()=>{
+            storageService.refFromURL(deleteImg).delete();
             history.push(`/detail?id=${locationEdit}`)
             window.alert("수정이 완료되었습니다.")
         })
