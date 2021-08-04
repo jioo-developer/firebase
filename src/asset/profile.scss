@@ -93,6 +93,8 @@
       }
 
       .name_area {
+        display: flex;
+        flex-direction: column;
         padding-left: 25px;
 
         @media #{$breakpoint-mobile} {
@@ -103,10 +105,12 @@
         }
 
         .nickname {
+          width: 100%;
           font-size: 50px;
 
           @media #{$breakpoint-mobile} {
             font-size: 35px;
+            text-align: center;
           }
         }
 
@@ -130,6 +134,8 @@
           margin-top: 13px;
           color: #12b886;
           text-decoration: underline;
+          text-align: left;
+          padding-left: 10px;
         }
         .nick_btn {
           margin-right: 15px;
@@ -137,10 +143,9 @@
       }
     }
 
-    .title_edit {
+    .suggest {
       @include size();
       display: flex;
-      flex-direction: column;
       margin-top: 70px;
       border-bottom: 1px solid #eee;
       box-sizing: border-box;
@@ -150,44 +155,15 @@
         margin-top: 35px;
       }
 
-      .title_wrap {
-        @include size();
-        display: flex;
-        align-items: center;
-
-        @media #{$breakpoint-mobile} {
-          border-top: 1px solid #eee;
-          box-sizing: border-box;
-          padding: 20px 0 0 0;
-        }
-
-        .title {
-          margin-right: 50px;
-          font-size: 18px;
-          font-weight: 500;
-        }
-
-        .titleName {
-          color: #495057;
-        }
-
-        .form-control {
-          @include input-text();
-          width: 70%;
-          margin-bottom: 0;
-        }
-
-        .btn {
-          margin-left: auto;
-          @include btn-Reset();
-          text-decoration: underline;
-          font-size: 16px;
-        }
+      .suggest_title {
+        margin-right: 50px;
+        font-size: 18px;
+        font-weight: 500;
       }
 
       .explan {
         @include size();
-        margin-top: 20px;
+        margin-top: 15px;
         color: #868e96;
         @media #{$breakpoint-mobile} {
           margin-top: 10px;
@@ -196,11 +172,12 @@
     }
 
     .withdrawal {
-      @extend .title_edit;
+      @extend .suggest;
       border-bottom: 1px solid #eee;
       box-sizing: border-box;
-      padding: 22px 0 20px 0;
+      padding: 18px 0 20px 0;
       margin-top: 0;
+      flex-direction: column;
 
       .delete_wrap {
         @include size();

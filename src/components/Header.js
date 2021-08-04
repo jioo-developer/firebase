@@ -12,14 +12,16 @@ function Header(props) {
     }
 
     useEffect(()=>{
-        setNameLoading(true)
+        setTimeout(() => {
+            setNameLoading(true)
+        },500);
     },[])
     
     return (
         <>
             <header>
                 {
-                    nameLoading ? <p className="title"><Link to="/">{props.receive[0].displayName}.log</Link></p> : ""
+                    nameLoading ? <p className="title"><Link to="/">{props.receive[0].displayName}.log</Link></p> : "로그인정보를 가져오는중..."
                 }
                 <div className="menu" onClick={()=>{
                     setNavToggle(!navToggle)

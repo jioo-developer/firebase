@@ -5,12 +5,12 @@ import { db, storageService } from '../Firebase';
 import {connect} from "react-redux";
 function Edit(props) {
     let [posts,setPosts] = useState([])
-    let [title,setTitle] = useState("")
-    let [textarea,setTextarea] =  useState("");
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
     let [fileCheck,setFilecheck] = useState(false)
     let [changeFile,setChangeFile] = useState(false)
+    let [title,setTitle] = useState("")
+    let [textarea,setTextarea] =  useState("");
     let user = props.user
     const history = useHistory();
     let locationEdit = props.reducer[0]
@@ -21,7 +21,11 @@ function Edit(props) {
       setPosts(postArray)
     })
   },[])
-
+  useEffect(()=>{
+    setTitle(posts.title)
+    setTextarea(posts.text)
+  },[posts])
+  
      useEffect(()=>{
         if(fileCheck){
             let img = document.createElement("img");
@@ -75,12 +79,6 @@ function Edit(props) {
         //미완
     }
 
-    async function clearPhoto(){
-        setFilecheck(true)
-        setChangeFile(false)
-        document.querySelector(".att").remove();
-    }
-
     async function post(e){
         e.preventDefault();
         let attchmentUrl = "";
@@ -105,12 +103,12 @@ function Edit(props) {
     return (
         <div className="upload">
             <form onSubmit={post}>
-                <input type="text" className="form-control titlearea" id="title" placeholder={posts.title === "" ? "제목을 입력해주세요" : posts.title} maxLength={120} onChange={e=>setTitle(e.target.value)}/>
+                <input type="text" className="form-control titlearea" id="title" value={title}  maxLength={120} onChange={e=>setTitle(e.target.value)}/>
                 <div className="textarea">
-                    <textarea className="text" placeholder={posts.text === "" ? "당신의 이야기를 입력해주세요" : posts.text} onKeyUp={enterEvent} onChange={e=>setTextarea(e.target.value)}></textarea>
+                    <textarea className="text"  onKeyUp={enterEvent} value={textarea} onChange={e=>setTextarea(e.target.value)}></textarea>
                     <figure>
                         {
-                            posts.url === "" ? "" : <img src={posts.url} className="att" alt=""/>
+                            posts.url === "" ? "" : <img src={posts.url} className="att"  alt=""/>
                         }
                     </figure>
                 </div>
@@ -121,7 +119,13 @@ function Edit(props) {
                     history.push("/")
                 }}>← &nbsp;나가기</div>
             <div className="cancel_wrap">
-                <div className="delete" onClick={clearPhoto}>파일삭제</div>
+                <div className="delete" onClick={()=>{
+                    setFilecheck(true)
+                    setChangeFile(false)
+                    let att = document.querySelector(".att");
+                    let figure = document.querySelector("figure");
+                    figure.removeChild(att)
+                }}>파일삭제</div>
                 <button type="submit" className="post">글작성</button>
             </div>
             </div>
