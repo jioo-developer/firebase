@@ -34,7 +34,7 @@ function App(props) {
           Login ? (
             <>
             <Route exact path="/">
-              <Home/>
+              <Home user={userObj}/>
             </Route>
             <Route exact path="/upload">
               <Upload user={userObj}/>

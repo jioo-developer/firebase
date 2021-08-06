@@ -53,11 +53,19 @@
 
       .left_wrap {
         display: flex;
+        align-items: center;
+
+        .profile {
+          width: 30px;
+          height: 30px;
+          margin-right: 7px;
+        }
 
         .writer {
           color: rgb(73, 80, 87);
           font-weight: 500;
           margin-right: 20px;
+          font-size: 18px;
           &:hover {
             text-decoration: underline;
           }
@@ -122,7 +130,10 @@
       .favorite_wrap {
         display: flex;
         justify-content: space-between;
-
+        align-items: center;
+        padding-bottom: 17px;
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box;
         @media #{$breakpoint-mobile} {
           align-items: center;
         }
@@ -151,6 +162,59 @@
         }
       }
 
+      .reply_wrap {
+        display: flex;
+        @include size();
+        flex-direction: column;
+        padding: 20px 0;
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box;
+
+        .user_info {
+          display: flex;
+          align-items: center;
+          img {
+            width: 55px;
+            height: 55px;
+            margin-right: 10px;
+          }
+
+          .user_text {
+            float: left;
+            display: flex;
+            flex-direction: column;
+            .reply_name {
+              font-size: 16px;
+              color: #333;
+            }
+          }
+          .edit_comment {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 15px 0 auto;
+
+            .btns {
+              width: 35%;
+              text-decoration: underline;
+
+              &:hover {
+                color: #12b886;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .reply_text {
+          margin-top: 20px;
+        }
+
+        .btn {
+          font-size: 14px;
+          padding: 0 10px;
+        }
+      }
+
       textarea {
         @include btn-Reset();
         width: 100%;
@@ -158,9 +222,11 @@
         cursor: inherit;
         resize: none;
         overflow: hidden;
-        margin: 10px 0;
+        margin: 20px 0 10px 0;
         border: 1px solid #dadada;
         box-sizing: border-box;
+        text-indent: 5px;
+        padding-top: 5px;
       }
 
       .btn {

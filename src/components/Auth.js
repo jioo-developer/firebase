@@ -34,10 +34,11 @@ function Auth() {
             await authService.createUserWithEmailAndPassword(id,password).then((result)=>{
                window.alert("회원가입을 환영합니다.")
                history.push("/")
-               result.user.updateProfile({displayName:nickname})
+               result.user.updateProfile({
+                   displayName:nickname,
+                   photoURL : "./img/default.svg"
+                })
             })
-
-            await db.collection("profile").doc(nickname).set({comment : ""})
         } catch(error){
             if(error.message === "The email address is badly formatted."){
                 window.alert("올바른 이메일 형식이 아닙니다.")

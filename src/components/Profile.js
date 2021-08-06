@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../asset/profile.scss"
-import { db, storageService } from '../Firebase';
+import { authService, storageService } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import "../asset/header.scss"
@@ -15,12 +15,12 @@ function Profile(props) {
     let [deleteProfile,setDeleteProfile] = useState("")
     let [preview,setpreview] = useState(false)
     let profileUrl= "";
+    let userDelete = authService.currentUser;
     const history = useHistory();
 
     useEffect(()=>{
         setTitle(user.displayName)
         setDeleteProfile(user.photoURL)
-        console.log(user.photoURL)
     },[])
 
     async function onFileChange(e){
@@ -37,13 +37,6 @@ function Profile(props) {
             setFile(result)
             }
             reader.readAsDataURL(theFile)
-    }
-    
-    async function clearPhoto(){
-        setFile(null)
-        document.querySelector("#img_check").value=null;
-        storageService.refFromURL(deleteProfile).delete();
-        await user.updateProfile({photoURL:"https://firebasestorage.googleapis.com/v0/b/retry-b4e10.appspot.com/o/%ED%85%8C%EC%8A%A4%ED%84%B04-profileImg%2Fdefault.svg?alt=media&token=36af18d0-c303-42d5-a190-41bf0d9f9a91"})
     }
 
     async function NameF(){
@@ -67,6 +60,12 @@ function Profile(props) {
         })    
     }
 
+    function deleteUser(){
+        userDelete.reauthenticateAndRetrieveDataWithCredential(user).then(()=>{
+            authService.deleteUser(userDelete)
+        })
+    }
+
     return (
         <div className="profile_wrap">
             <Header/>
@@ -82,7 +81,6 @@ function Profile(props) {
                             {
                                 uploadCheck ? <div className="uploads btn" onClick={uploadEnd}>바꾸기 완료</div> : <label htmlFor="img_check" className="uploads btn" >이미지 업로드</label>
                             }
-                            <button className="deletes btn" onClick={clearPhoto}>이미지 제거</button>
                     </div>
                     <div className="name_area">
                         {
@@ -102,7 +100,7 @@ function Profile(props) {
                 <div className="withdrawal">
                     <div className="delete_wrap">
                         <p className="withdrawal_title">회원 탈퇴</p>
-                        <button className="btn">회원 탈퇴</button>
+                        <button className="btn" onClick={deleteUser}>회원 탈퇴</button>
                     </div>
                     <p className="explan">탈퇴 시 작성한 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</p>
                 </div>

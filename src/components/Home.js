@@ -7,6 +7,7 @@ import Header from './Header';
 function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
+  let user =props.user
 
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -38,7 +39,7 @@ function Home(props) {
                     </div>
                     <div className="writer_wrap">
                       <div className="id">
-                        <img src="./img/profile.svg" alt="" className="profile"/>
+                        <img src={post.profile} alt="" className="profile"/>
                         <p className="profile_id">{post.user}</p>
                       </div>
                       <p className="favorite">❤{post.favorite}</p> 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
@@ -46,7 +46,9 @@ function Upload(props) {
             writer : user.uid,
             date: `${year}년${month}월${day}일`,
             url : attchmentUrl,
-            favorite : 0
+            favorite : 0,
+            profile : user.photoURL,
+            fileName : file === "" ? "" : fileName.name
         }
 
         await db.collection("post").add(content).then(()=>{
