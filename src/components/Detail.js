@@ -21,7 +21,9 @@ function Detail(props) {
   let day = time.getDate();
   let locations = 쿼리스트링.get("id")
   let [fileNamed,setFileNamed] = useState("")
-
+  let [commentChange,setCommentChange] = useState(false)
+  let [commentDelete,setCommentDelete] = useState(false)
+  let [newComment,setNewComment] = useState("")
   function setCookie(name,value,expiredays){
     let today = new Date();
     today.setDate(today.getDate() + expiredays);
@@ -48,10 +50,6 @@ function Detail(props) {
     })
 
   },[])
-
-  useEffect(()=>{
-    console.log(reply)
-  },[reply])
 
   useEffect(()=>{
     setFileNamed(posts.fileName)
@@ -140,11 +138,15 @@ function Detail(props) {
                             <p className="reply_date">{com.date}</p>
                             </div>
                             <div className="edit_comment">
-                              <div className="edit btns">수정</div>
+                              <div className="edit btns" onClick={()=>{
+                                setCommentChange(true)
+                              }}>수정</div>
                               <div className="delete btns">삭제</div>
                             </div>
                             </div>
-                            <p className="reply_text">{com.comment}</p>
+                            {
+                              commentChange !== true ? <p className="reply_text">{com.comment}</p> :<input type="text" placeholder={com.comment} className="form-control reply_text" onChange={e=>setNewComment(e.target.value)}/>
+                            }
                             </div>
                             </>
                           })
