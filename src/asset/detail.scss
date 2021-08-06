@@ -131,7 +131,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-bottom: 17px;
+        padding-bottom: 13px;
         border-bottom: 1px solid #ddd;
         box-sizing: border-box;
         @media #{$breakpoint-mobile} {
@@ -190,12 +190,14 @@
           }
           .edit_comment {
             display: flex;
+            width: 70px;
             justify-content: space-between;
             margin: 0 15px 0 auto;
 
             .btns {
-              width: 35%;
+              width: 44%;
               text-decoration: underline;
+              color: #495057;
 
               &:hover {
                 color: #12b886;
@@ -206,7 +208,7 @@
         }
 
         .reply_text {
-          margin-top: 20px;
+          margin-top: 15px;
         }
 
         .btn {
