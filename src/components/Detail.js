@@ -76,13 +76,23 @@ function Detail(props) {
           replyrer : uid,
           comment : comment,
           date: `${year}년${month}월${day}일`,
-          profile : user.photoURL
+          profile : user.photoURL,
+          uids : user.uid
     };
 
-    await db.collection("post").doc(locations).collection("reply").doc(id).set(comment_content).then(()=>{
+    await db.collection("post").doc(locations).collection("reply").add(comment_content).then(()=>{
       window.alert("댓글을 달았습니다.")
+      document.querySelector(".comment_input").value=""
     })
   }
+
+  function edit_reply(){
+    setCommentChange(true)
+    var btn = document.querySelectorAll(".edit")
+    
+    var text = document.querySelector(".reply_text")
+  }
+
     return (
             <div className="detail_wrap">
               <Header/>
@@ -115,7 +125,7 @@ function Detail(props) {
                   <div> <figure><img src={posts.url} alt="" className="imgs"/></figure></div>
                     <div className="comment">
                       <div className="favorite_wrap">
-                        <p className="com_title">게시글에 대한 의견을 달아주세요.</p>
+                        <p className="com_title">게시글에 대한 댓글을 달아주세요.</p>
                         <input type="checkbox" id="favorite_check" onClick={e=>{
                         if(e.target.checked){
                           db.collection("post").doc(쿼리스트링.get("id")).update({
@@ -138,15 +148,11 @@ function Detail(props) {
                             <p className="reply_date">{com.date}</p>
                             </div>
                             <div className="edit_comment">
-                              <div className="edit btns" onClick={()=>{
-                                setCommentChange(true)
-                              }}>수정</div>
+                              <div className="edit btns" data-index={i} onClick={edit_reply}>수정</div>
                               <div className="delete btns">삭제</div>
                             </div>
                             </div>
-                            {
-                              commentChange !== true ? <p className="reply_text">{com.comment}</p> :<input type="text" placeholder={com.comment} className="form-control reply_text" onChange={e=>setNewComment(e.target.value)}/>
-                            }
+                             <p className="reply_text" data-index={i}>{com.comment}</p>
                             </div>
                             </>
                           })
