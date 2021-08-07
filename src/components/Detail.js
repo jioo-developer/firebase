@@ -22,8 +22,8 @@ function Detail(props) {
   let locations = 쿼리스트링.get("id")
   let [fileNamed,setFileNamed] = useState("")
   let [commentChange,setCommentChange] = useState(false)
-  let [commentDelete,setCommentDelete] = useState(false)
   let [newComment,setNewComment] = useState("")
+
   function setCookie(name,value,expiredays){
     let today = new Date();
     today.setDate(today.getDate() + expiredays);
@@ -44,7 +44,8 @@ function Detail(props) {
 
     db.collection("post").doc(쿼리스트링.get("id")).collection("reply").onSnapshot((replys)=>{
       let replyArray = replys.docs.map((doc)=>({
-        ...doc.data()
+        ...doc.data(),
+        id: doc.id
       }))
       setreply(replyArray)
     })
@@ -86,11 +87,47 @@ function Detail(props) {
     })
   }
 
-  function edit_reply(){
+  function edit_reply(e){
     setCommentChange(true)
-    var btn = document.querySelectorAll(".edit")
-    
-    var text = document.querySelector(".reply_text")
+    let btn = e.target.getAttribute("data-index")
+    let tests = Array.from(document.querySelectorAll(".reply_text"))
+    tests.forEach((index)=>{
+      var indexData = index.getAttribute("data-index")
+      if(btn === indexData){
+        document.querySelector(`.reply_text${indexData}`).classList.add("none")
+        document.querySelector(`.reply_input${indexData}`).classList.add("block")
+      }
+    })
+  }
+
+    function edit_end(e){
+    setCommentChange(false)
+    let btn = e.target.getAttribute("data-index")
+    let inputs = Array.from(document.querySelectorAll(".reply_input"))
+    inputs.map(function(a,i){
+      var indexInput = a.getAttribute("data-index")
+      if(btn === indexInput){
+        document.querySelector(`.reply_text${i}`).classList.remove("none")
+        document.querySelector(`.reply_input${i}`).classList.remove("block")
+        var indexID = document.querySelector(`.reply_input${i}`).getAttribute("data-id")
+        db.collection("post").doc(locations).collection("reply").doc(indexID).update({comment:newComment})
+      }
+    })
+  }
+
+  function reply_delete(e){
+    let btn = e.target.getAttribute("data-index")
+    let deletes = Array.from(document.querySelectorAll(".reply_text"))
+    deletes.map(function(a,i){
+      var deleteIndex = a.getAttribute("data-index")
+      if(btn === deleteIndex){
+        var deleteID = document.querySelector(`.reply_text${i}`).getAttribute("data-id")
+        const ok = window.confirm("정말 삭제 하시겠습니까?");
+        if(ok){
+          db.collection("post").doc(locations).collection("reply").doc(deleteID).delete();
+        }
+      }
+    })
   }
 
     return (
@@ -147,12 +184,25 @@ function Detail(props) {
                             <p className="reply_name">{com.replyrer}</p>
                             <p className="reply_date">{com.date}</p>
                             </div>
-                            <div className="edit_comment">
-                              <div className="edit btns" data-index={i} onClick={edit_reply}>수정</div>
-                              <div className="delete btns">삭제</div>
+                            {
+                              user.uid === com.uids ? (
+                                <>
+                                <div className="edit_comment">
+                                  {
+                                    commentChange === false ? (
+                                      <>
+                                      <div className="edit btns" data-index={i} onClick={edit_reply}>수정</div>
+                                      </>
+                                    ) : <div className="edit btns" data-index={i} onClick={edit_end}>완료</div>
+                                  }
+                                  <div className="delete btns" data-index={i} onClick={reply_delete}>삭제</div>
+                                </div>
+                                </>
+                              ) : null
+                            }
                             </div>
-                            </div>
-                             <p className="reply_text" data-index={i}>{com.comment}</p>
+                              <p className={`reply_text reply_text${i}`} data-id={com.id} data-index={i}>{com.comment}</p>
+                              <input type="text" className={`reply_input reply_input${i} form-control`} placeholder={com.comment}  data-index={i} data-id={com.id} onChange={e=>setNewComment(e.target.value)}/>
                             </div>
                             </>
                           })

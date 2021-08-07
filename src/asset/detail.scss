@@ -215,11 +215,21 @@
           @include input-text();
           width: 100%;
           margin-bottom: 0;
+          display: none;
+          margin-top: 10px;
         }
 
         .btn {
           font-size: 14px;
           padding: 0 10px;
+        }
+
+        .none {
+          display: none;
+        }
+
+        .block {
+          display: block;
         }
       }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
