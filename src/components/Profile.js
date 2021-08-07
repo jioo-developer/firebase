@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../asset/profile.scss"
-import { authService, firebaseInstance, storageService } from '../Firebase';
+import { authService, db, firebaseInstance, storageService } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import "../asset/header.scss"
@@ -52,7 +52,6 @@ function Profile(props) {
         profileUrl = await response.ref.getDownloadURL();
         
         await user.updateProfile({photoURL : profileUrl,}).then(()=>{
-            storageService.refFromURL(deleteProfile).delete();
             setpreview(false)
             setUploadCheck(false)
             window.alert("프로필 변경이 완료되었습니다.")
@@ -63,6 +62,7 @@ function Profile(props) {
     function deleteUser(){
         let pw = window.prompt("비밀번호를 입력해주세요")
         let password = pw
+        db.collection("delete").doc(`${user.displayName}`).set({상태 : "탈퇴"})
         const credential = firebaseInstance.auth.EmailAuthProvider.credential(user.email,password)
         userDelete.reauthenticateWithCredential(credential).then(()=>{
             userDelete.delete().then(()=>{

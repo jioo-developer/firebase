@@ -21,7 +21,6 @@ function Notice() {
         text : "비밀번호 변경은 비밀번호 찾기를 통해 이메일로 전송되는 메일을 통해 변경 하실 수 있습니다."
         }
     ]
-    console.log(noticeData)
     return (
         <div className="notice_wrap">
             <Header/>

@@ -14,7 +14,7 @@ function Header(props) {
     useEffect(()=>{
         setTimeout(() => {
             setNameLoading(true)
-        },500);
+        },1000);
     },[])
     
     return (
