@@ -217,6 +217,10 @@
           margin-bottom: 0;
           display: none;
           margin-top: 10px;
+
+          &::placeholder {
+            color: #000;
+          }
         }
 
         .btn {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../asset/profile.scss"
-import { authService, storageService } from '../Firebase';
+import { authService, firebaseInstance, storageService } from '../Firebase';
 import { useHistory } from 'react-router-dom';
 import Header from './Header';
 import "../asset/header.scss"
@@ -15,7 +15,7 @@ function Profile(props) {
     let [deleteProfile,setDeleteProfile] = useState("")
     let [preview,setpreview] = useState(false)
     let profileUrl= "";
-    let userDelete = authService.currentUser;
+    let userDelete = authService.currentUser
     const history = useHistory();
 
     useEffect(()=>{
@@ -61,10 +61,18 @@ function Profile(props) {
     }
 
     function deleteUser(){
-        userDelete.reauthenticateAndRetrieveDataWithCredential(user).then(()=>{
-            authService.deleteUser(userDelete)
+        let pw = window.prompt("비밀번호를 입력해주세요")
+        let password = pw
+        const credential = firebaseInstance.auth.EmailAuthProvider.credential(user.email,password)
+        userDelete.reauthenticateWithCredential(credential).then(()=>{
+            userDelete.delete().then(()=>{
+                window.alert("회원탈퇴 되었습니다.")
+                authService.signOut();
+                history.push("/")
+            })
         })
     }
+
 
     return (
         <div className="profile_wrap">
