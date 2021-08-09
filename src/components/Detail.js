@@ -211,6 +211,7 @@ function Detail(props) {
                       <TextareaAutosize
                       cacheMeasurements
                       onHeightChange={(height) => console.log(height)}
+                      minRows={4}
                       className="comment_input"
                       onChange={e=>setcomment(e.target.value)}
                     />
