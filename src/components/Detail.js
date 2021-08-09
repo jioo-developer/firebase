@@ -4,7 +4,7 @@ import "../asset/detail.scss"
 import { useHistory } from 'react-router-dom'
 import Header from './Header'
 import { connect } from 'react-redux'
-
+import TextareaAutosize from 'react-textarea-autosize';
 function Detail(props) {
   let [posts,setPosts] = useState([])
   let [favoriteBtn,setFavoriteBtn] = useState(false)
@@ -208,7 +208,12 @@ function Detail(props) {
                           })
                         }
                       <form onSubmit={commentUpload}>
-                      <textarea className="comment_input" onChange={e=>setcomment(e.target.value)}/>
+                      <TextareaAutosize
+                      cacheMeasurements
+                      onHeightChange={(height) => console.log(height)}
+                      className="comment_input"
+                      onChange={e=>setcomment(e.target.value)}
+                    />
                       <button className="btn">댓글 작성</button>
                       </form>
                     </div>
