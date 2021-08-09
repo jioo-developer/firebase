@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
+import TextareaAutosize from 'react-textarea-autosize';
 function Upload(props) {
     let [title,setTitle] = useState("")
     let [textarea,setTextarea] =  useState("");
@@ -66,25 +67,18 @@ function Upload(props) {
         }, 1000);
     }
 
-    function enterEvent(){
-        let height = document.querySelector(".text");
-        if(window.event.keyCode === 13){
-            height.style.height="auto";
-            height.style.height = height.scrollHeight + "px";
-        } else if(window.event.keyCode === 8) {
-            height.style.height="auto";  
-            height.style.height = height.scrollHeight + "px";
-        }
-
-        //미완
-    }
-
     return (
         <div className="upload">
             <form onSubmit={post}>
                 <input type="text" className="form-control titlearea" id="title" placeholder="제목을 입력하세요." maxLength={120} onChange={e=>setTitle(e.target.value)}/>
                 <div className="textarea">
-                    <textarea className="text" placeholder="당신의 이야기를 적어보세요." onKeyUp={enterEvent} onChange={e=>setTextarea(e.target.value)}></textarea>
+                    <TextareaAutosize
+                    cacheMeasurements
+                    onHeightChange={(height) => console.log(height)}
+                    className="text"
+                    placeholder="당신의 이야기를 적어보세요."
+                    onChange={e=>setTextarea(e.target.value)}
+                    />
                     <figure>
                     {
                         file && <img src={file} className="att" alt=""/>

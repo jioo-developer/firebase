@@ -3,6 +3,7 @@ import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
 import {connect} from "react-redux";
+import TextareaAutosize from 'react-textarea-autosize';
 function Edit(props) {
     let [posts,setPosts] = useState([])
     let [file,setFile] = useState("");
@@ -77,20 +78,6 @@ function Edit(props) {
         }
     }
 
-
-    function enterEvent(){
-        let height = document.querySelector(".text");
-        if(window.event.keyCode === 13){
-            height.style.height="auto";
-            height.style.height = height.scrollHeight + "px";
-        } else if(window.event.keyCode === 8) {
-            height.style.height="auto";  
-            height.style.height = height.scrollHeight + "px";
-        }
-
-        //미완
-    }
-
     async function post(e){
         e.preventDefault();
         if(file !== ""){
@@ -136,7 +123,13 @@ function Edit(props) {
             <form onSubmit={post}>
                 <input type="text" className="form-control titlearea" id="title" value={title}  maxLength={120} onChange={e=>setTitle(e.target.value)}/>
                 <div className="textarea">
-                    <textarea className="text"  onKeyUp={enterEvent} value={textarea} onChange={e=>setTextarea(e.target.value)}></textarea>
+                    <TextareaAutosize
+                    cacheMeasurements
+                    onHeightChange={(height) => console.log(height)}
+                    className="text"
+                    value={textarea} 
+                    onChange={e=>setTextarea(e.target.value)}
+                    />
                     <div>
                     <figure>
                         {
