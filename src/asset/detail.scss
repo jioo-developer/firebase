@@ -101,6 +101,7 @@
     .text {
       margin-top: 20px;
       font-size: 20px;
+      word-break: break-all;
 
       @media #{$breakpoint-mobile} {
         margin-top: 15px;
