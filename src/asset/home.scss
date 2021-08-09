@@ -74,8 +74,12 @@
 
           .post_text {
             font-weight: 300;
+            height: 65px;
             color: #333;
-            margin-top: 10px;
+            margin-top: 5px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: break-all;
           }
 
           .post_date {
