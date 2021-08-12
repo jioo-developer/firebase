@@ -17,7 +17,6 @@ function Auth() {
         let checks = document.querySelector("#all_check").nextSibling;
         if(checkLength === 2){
             checks.style.backgroundImage="url('')";
-            setCheck(false)
          } else if(checkLength === 3){
              checks.style.backgroundImage="url('./img/checked.svg')";
              checks.style.border=0
