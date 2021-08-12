@@ -8,6 +8,7 @@ function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
   let user =props.user
+  let order;
 
   useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -27,7 +28,9 @@ function Home(props) {
               {
                 posts.map(function(post,i){
                   return <>
-                  <Link to={`/detail?id=${post.id}`}>
+                  <Link to={`/detail?id=${post.id}`} style={order = {
+                    order : post.order
+                  }}>
                   <div className="post">
                     <figure className="thumbnail">
                       {
@@ -59,4 +62,5 @@ function Home(props) {
     )
 }
 
-export default Home
+export default Home;
+

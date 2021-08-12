@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../asset/upload.scss"
 import { useHistory } from 'react-router-dom';
 import { db, storageService } from '../Firebase';
+import { connect } from 'react-redux'
 import TextareaAutosize from 'react-textarea-autosize';
 function Upload(props) {
     let [title,setTitle] = useState("")
+    let [posts,setPosts] = useState([])
     let [textarea,setTextarea] =  useState("");
     let [file,setFile] = useState("");
     let [fileName,setFileName] = useState("")
@@ -15,6 +17,16 @@ function Upload(props) {
     let month = time.getMonth()+1;
     let day = time.getDate();
     const history = useHistory();
+    let max = 10000
+
+    useEffect(()=>{
+    db.collection("post").onSnapshot((snapshot)=>{
+      let postArray = snapshot.docs.map((doc)=>({
+        ...doc.data()
+      }))
+      setPosts(postArray)
+    })
+  },[])
 
     function onFileChange(e){
         const theFile = e.target.files[0];
@@ -49,7 +61,8 @@ function Upload(props) {
             url : attchmentUrl,
             favorite : 0,
             profile : user.photoURL,
-            fileName : file === "" ? "" : fileName.name
+            fileName : file === "" ? "" : fileName.name,
+            order : max-posts.length-1
         }
 
         await db.collection("post").add(content).then(()=>{
@@ -100,4 +113,11 @@ function Upload(props) {
     )
 }
 
-export default Upload
+function 게시글갯수공장(state){
+  return{
+    reducer:state.reducer3
+  }
+}
+
+export default connect(게시글갯수공장)(Upload);
+
