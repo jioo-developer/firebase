@@ -19,8 +19,6 @@ function Home(props) {
     })
   },[])
 
-  console.log(posts)
-
     return (
       <div className="main">
         <div className="in_wrap">
@@ -33,7 +31,7 @@ function Home(props) {
                   <div className="post">
                     <figure className="thumbnail">
                       {
-                        post.url === "" ? <img src="./img/no-image.jpg" alt=""/> : <img src={post.url} alt=""/>
+                        post.url === "" ? <img src="./img/no-image.jpg" alt="" height="200px"/> : <img src={post.url} alt=""/>
                       }
                     </figure>
                     <div className="text_wrap">
