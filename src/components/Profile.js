@@ -43,6 +43,8 @@ function Profile(props) {
         setNameEdit(!NameEdit)
         await user.updateProfile({displayName : title}).then(()=>{
             setNameEdit(!NameEdit)
+            window.alert("닉네임이 변경되었습니다")
+            history.push("/")
         })
     }
 
