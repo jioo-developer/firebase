@@ -10,17 +10,19 @@ function Auth() {
     let[checkLength,setCheckLength] = useState(0)
     let[nickname,setNickname] = useState("")
     const history = useHistory();
-    const authData = [{id:"auth",text:"회원가입및 운영약관 동의 (필수)"},{id:"data",text:"개인정보 수집 및 동의 (필수)"},{id:"location",text:"위치정보 이용약관 동의 (선택)"}]
+    const authData = [{id:"auth",text:"회원가입및 운영약관 동의"},{id:"data",text:"개인정보 수집 및 동의"},{id:"location",text:"위치정보 이용약관 동의"}]
     useEffect(()=>{
         let all_check = document.getElementById("all_check")
         let checks = document.querySelector("#all_check").nextSibling;
+        console.log(checkLength)
         if(checkLength === 2){
             checks.style.backgroundImage="url('')";
-            setCheck(true)
+            setCheck(false)
          } else if(checkLength === 3){
              checks.style.backgroundImage="url('./img/checked.svg')";
              checks.style.border=0
              all_check.checked = true
+             setCheck(true)
         } else {
             checks.style.backgroundImage="url('')";
             checks.style.border="1px solid #eee"
@@ -57,13 +59,14 @@ function Auth() {
         if(e.target.checked){
             target.style.backgroundImage="url('./img/checked.svg')"
             target.style.border=0
-                setCheckLength(checkLength+1)
-        } else {
+            setCheckLength(checkLength+1)
+        }else {
             target.style.backgroundImage="url('')"
             target.style.border="1px solid #eee"
-            setCheckLength(checkLength-1)
+             setCheckLength(checkLength-1)
         }
 
+        console.log(checkLength)
     }
 
     function allCheck(e){
@@ -78,10 +81,12 @@ function Auth() {
             checkbox.nextSibling.style.border=0
         })
         } else {
+            setCheck(false)
             subCheck.forEach((checkbox)=>{
             checkbox.checked = false
             e.target.nextSibling.style.backgroundImage="url('')"
             checkbox.nextSibling.style.backgroundImage="url('')"
+            e.target.nextSibling.style.border="1px solid #eee"
             checkbox.nextSibling.style.border="1px solid #eee"
         })
         }
