@@ -78,7 +78,6 @@ function Auth() {
             checkbox.nextSibling.style.border=0
         })
         } else {
-            setCheck(false)
             subCheck.forEach((checkbox)=>{
             checkbox.checked = false
             e.target.nextSibling.style.backgroundImage="url('')"
