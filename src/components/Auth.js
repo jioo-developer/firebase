@@ -12,9 +12,9 @@ function Auth() {
     const history = useHistory();
     const authData = [{id:"auth",text:"회원가입및 운영약관 동의"},{id:"data",text:"개인정보 수집 및 동의"},{id:"location",text:"위치정보 이용약관 동의"}]
     useEffect(()=>{
+        console.log(checkLength)
         let all_check = document.getElementById("all_check")
         let checks = document.querySelector("#all_check").nextSibling;
-        console.log(checkLength)
         if(checkLength === 2){
             checks.style.backgroundImage="url('')";
             setCheck(false)
@@ -72,7 +72,7 @@ function Auth() {
     function allCheck(e){
         let subCheck = document.querySelectorAll("input[name='sub_check']")
         if(e.target.checked){
-            setCheck(true)
+            setCheck(!check)
             subCheck.forEach((checkbox)=>{
             checkbox.checked = true
             e.target.nextSibling.style.backgroundImage="url('./img/checked.svg')"
@@ -80,8 +80,9 @@ function Auth() {
             checkbox.nextSibling.style.backgroundImage="url('./img/checked.svg')"
             checkbox.nextSibling.style.border=0
         })
+        setCheckLength(3)
         } else {
-            setCheck(false)
+            setCheck(!check)
             subCheck.forEach((checkbox)=>{
             checkbox.checked = false
             e.target.nextSibling.style.backgroundImage="url('')"
@@ -89,6 +90,7 @@ function Auth() {
             e.target.nextSibling.style.border="1px solid #eee"
             checkbox.nextSibling.style.border="1px solid #eee"
         })
+        setCheckLength(0)
         }
     }
 
@@ -125,7 +127,7 @@ function Auth() {
              </ul>
             </section>
             {
-                 check  ? <button className="btn">회원가입</button> : <div className="un_btn">회원가입</div>
+                 check ? <button className="btn">회원가입</button> : <div className="un_btn">회원가입</div>
              }
             </form>
         </div>
