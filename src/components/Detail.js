@@ -167,12 +167,15 @@ function Detail(props) {
                         if(e.target.checked){
                           db.collection("post").doc(쿼리스트링.get("id")).update({
                           favorite:posts.favorite+1
-                        })
+                        }).then(()=>{
                         setCookie("Cookie","done",1)
                         setFavoriteBtn(true)
+                        })
                         } 
                       }}/>
-                      <label htmlFor="favorite_check" className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</label>
+                      {
+                        favoriteBtn !==  true ? <label htmlFor="favorite_check" className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</label> : <div className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</div>
+                      }
                       </div>
                         {
                           reply.map(function(com,i){

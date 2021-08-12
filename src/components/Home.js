@@ -19,6 +19,8 @@ function Home(props) {
     })
   },[])
 
+  console.log(posts)
+
     return (
       <div className="main">
         <div className="in_wrap">
@@ -30,7 +32,9 @@ function Home(props) {
                   <Link to={`/detail?id=${post.id}`}>
                   <div className="post">
                     <figure className="thumbnail">
-                      <img src={post.url} alt=""/>
+                      {
+                        post.url === "" ? <img src="./img/no-image.jpg" alt=""/> : <img src={post.url} alt=""/>
+                      }
                     </figure>
                     <div className="text_wrap">
                       <p className="post_title">{post.title}</p>
