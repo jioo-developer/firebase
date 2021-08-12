@@ -59,15 +59,17 @@ function Detail(props) {
   async function onDelete(e){
     e.preventDefault();
     const ok = window.confirm("정말 삭제 하시겠습니까?");
+    let locate = db.collection("post").doc(쿼리스트링.get("id"))
     if(ok){
-      await db.doc(`post/${쿼리스트링.get("id")}`).delete().then(()=>{
-        history.push("/")
+      reply.map(function(a,i){
+        locate.collection("reply").doc(reply[i].id).delete();
       })
+      await locate.delete().then(()=>{
+        history.push("/")
+      });
       let storageRef = storageService.ref();
       let imagesRef = storageRef.child(`${posts.user}/${fileNamed}`)
-      imagesRef.delete().then(()=>{
-          console.log("성공")
-      })
+      imagesRef.delete()
     }
   }
 
