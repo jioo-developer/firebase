@@ -23,6 +23,7 @@ function Detail(props) {
   let [fileNamed,setFileNamed] = useState("")
   let [commentChange,setCommentChange] = useState(false)
   let [newComment,setNewComment] = useState("")
+  let [mapData,setMapdata] = useState([])
 
   function setCookie(name,value,expiredays){
     let today = new Date();
@@ -49,12 +50,20 @@ function Detail(props) {
       }))
       setreply(replyArray)
     })
-
   },[])
 
   useEffect(()=>{
     setFileNamed(posts.fileName)
+    let copyMapData = [...mapData]
+    if(posts.url !== undefined) {
+      copyMapData.push(...posts.url) 
+     }
+    setMapdata(copyMapData)
   },[posts])
+
+  useEffect(()=>{
+      console.log(mapData)
+  },[mapData])
 
   async function onDelete(e){
     e.preventDefault();
@@ -68,8 +77,12 @@ function Detail(props) {
         history.push("/")
       });
       let storageRef = storageService.ref();
-      let imagesRef = storageRef.child(`${posts.user}/${fileNamed}`)
-      imagesRef.delete()
+      if(fileNamed !== ""){
+        fileNamed.map(function(a,i){
+        let imagesRef = storageRef.child(`${posts.user}/${fileNamed[i]}`)
+        imagesRef.delete()
+      })
+      }
     }
   }
 
@@ -161,7 +174,11 @@ function Detail(props) {
                 </section>
                 <section className="content_wrap">
                   <p className="text">{posts.text}</p>
-                  <div> <figure><img src={posts.url} alt="" className="imgs"/></figure></div>
+                  {
+                    mapData.map(function(url,i){
+                      return <img src={url} className="att" alt="" key={i}/>
+                    })
+                  }
                     <div className="comment">
                       <div className="favorite_wrap">
                         <p className="com_title">게시글에 대한 댓글을 달아주세요.</p>
@@ -176,7 +193,11 @@ function Detail(props) {
                         } 
                       }}/>
                       {
-                        favoriteBtn !==  true ? <label htmlFor="favorite_check" className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</label> : <div className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</div>
+                        favoriteBtn !==  true ? (
+                          <>
+                          <label htmlFor="favorite_check" className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</label> 
+                          </>
+                        ): <div className="favorite_btn"><span>👍</span>추천&nbsp;{posts.favorite}</div>
                       }
                       </div>
                         {
@@ -207,7 +228,8 @@ function Detail(props) {
                             }
                             </div>
                               <p className={`reply_text reply_text${i}`} data-id={com.id} data-index={i}>{com.comment}</p>
-                              <input type="text" className={`reply_input reply_input${i} form-control`} placeholder={com.comment}  data-index={i} data-id={com.id} onChange={e=>setNewComment(e.target.value)}/>
+                              <input type="text" className={`reply_input reply_input${i} form-control`} placeholder={com.comment}
+                                data-index={i} data-id={com.id} onChange={e=>setNewComment(e.target.value)}/>
                             </div>
                             </>
                           })

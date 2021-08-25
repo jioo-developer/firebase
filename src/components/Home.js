@@ -7,6 +7,7 @@ import Header from './Header';
 function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
+  let[sumNail,setSumNail] = useState([])
   let user =props.user
   let order;
 
@@ -34,7 +35,7 @@ function Home(props) {
                   <div className="post">
                     <figure className="thumbnail">
                       {
-                        post.url === "" ? <img src="./img/no-image.jpg" alt="" height="200px"/> : <img src={post.url} alt=""/>
+                        post.url === "" ? <img src="./img/no-image.jpg" alt="" height="200px"/> : <img src={post.url[0]} alt=""/>
                       }
                     </figure>
                     <div className="text_wrap">

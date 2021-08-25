@@ -6,118 +6,93 @@ import {connect} from "react-redux";
 import TextareaAutosize from 'react-textarea-autosize';
 function Edit(props) {
     let [posts,setPosts] = useState([])
-    let [file,setFile] = useState("");
-    let [fileName,setFileName] = useState("")
-    let [fileCheck,setFilecheck] = useState(false)
-    let [changeFile,setChangeFile] = useState(false)
     let [title,setTitle] = useState("")
     let [textarea,setTextarea] =  useState("");
-    let deleteImg;
     let user = props.user
     const history = useHistory();
     let locationEdit = props.reducer[0]
-    let [attchmentUrl,setattchmentUrl] = useState("")
-    let [fileNamed,setFileNamed] = useState("")
-    let [deleteBtn,setDeleteBtn] = useState(false)
-    let [유지,set유지] = useState(false)
+    let [preview,setPreview] = useState([])
+    let [filename,setFileName] = useState([])
+    let [fileNamed,setFileNamed] = useState([])
+    let [saveImage,setSaveImage] = useState([])
+    let [keep,setKeep] = useState(false)
+    let array = []
+    let attchmentUrl =[];
 
   useEffect(()=>{
     db.collection("post").doc(`${locationEdit}`).onSnapshot((snapshot)=>{
-      let postArray = ({...snapshot.data()})
-      setPosts(postArray)
-    })
-    document.querySelector(".cancel_wrap").style.width="240px"
-    document.querySelector(".warnning").style.fontSize="14px"
-    document.querySelector(".warnning").style.color="gray"
+        let postArray = ({...snapshot.data()})
+            setPosts(postArray)
+        })
   },[])
+
   useEffect(()=>{
     setTitle(posts.title)
     setTextarea(posts.text)
-    deleteImg = posts.url
-    setattchmentUrl(deleteImg)
     setFileNamed(posts.fileName)
+
+    let copySaveImage = [...saveImage]
+    if(posts.url !== undefined){
+        copySaveImage.push(...posts.url)
+    }
+    setSaveImage(copySaveImage)
+
   },[posts])
-  
-     useEffect(()=>{
-        if(fileCheck){
-            let img = document.createElement("img");
-            img.src=`${file}`
-            img.classList.add("att")
-            document.querySelector("figure").append(img)
+
+    function onFileChange(e){
+        setKeep(true)
+        let files = Array.from(e.target.files)
+        setFileName(files)
+        for(var i =0; i < files.length; i++){
+            const reader = new FileReader();
+        if(files){
+            reader.readAsDataURL(files[i])
         }
-        if(changeFile){
-            let img = document.createElement("img");
-            img.src=`${file}`
-            img.classList.add("att")
-            document.querySelector("figure").append(img)
+
+        reader.onload = async e =>{
+            array.push(e.target.result)
+            let copyPreview = [...preview]
+            await copyPreview.push(...array);
+            setPreview(copyPreview)
             }
-    },[file])
-
-     function onFileChange(e){
-        set유지(true)
-        const theFile = e.target.files[0];
-        setFileName(theFile)
-        const reader = new FileReader();
-        reader.onloadend = (finished) => {
-            const {
-                currentTarget : {result},
-            } = finished
-
-            setFile(result)
-        }
-            if(theFile){
-                reader.readAsDataURL(theFile)
-            }
-
-        let findImg =document.querySelector(".att");
-        if(findImg !== null){
-            findImg.remove();
-            setChangeFile(true)
-        } else {
-            setFilecheck(true)
         }
     }
 
     async function post(e){
         e.preventDefault();
-        if(file !== ""){
-            const fileRef = storageService.ref().child(`${user.displayName}/${fileName.name}`)
-            const response = await fileRef.putString(file,"data_url");
-            attchmentUrl = await response.ref.getDownloadURL();
+        if(preview.length !== 0 ){
+            for(var i=0; i<preview.length; i++){
+                const fileRef = storageService.ref().child(`${user.displayName}/${filename[i].name}`)
+                const response = await fileRef.putString(preview[i],"data_url");
+                attchmentUrl.push(await response.ref.getDownloadURL());
+            }
         }
 
         const content = {
             title : title,
             text : textarea,
-            url : attchmentUrl,
-            fileName : deleteBtn === true || file === "" ? "" : fileName.name
+            url : keep === false ? saveImage : attchmentUrl,
+            fileName : keep === false ? fileNamed : filename.map(function(a,i){
+              return filename[i].name
+            }),
         }
+
         await db.doc(`post/${locationEdit}`).update(content).then(()=>{
-            if(deleteBtn === false && 유지 === true){
-                let storageRef = storageService.ref();
-                let imagesRef = storageRef.child(`${posts.user}/${fileNamed}`)
-                imagesRef.delete().then(()=>{
-                console.log("성공")
-            })
-            }
+            if(keep === false){
             window.alert("수정이 완료되었습니다.")
             history.push(`/detail?id=${locationEdit}`)
+            } else {
+                let storageRef = storageService.ref();
+                fileNamed.map(function(a,i){
+                    let imagesRef = storageRef.child(`${posts.user}/${fileNamed[i]}`)
+                    imagesRef.delete()
+                })
+            window.alert("수정이 완료되었습니다.")
+            history.push(`/detail?id=${locationEdit}`)
+            }
         })
-    }
-
-    async function deletes() {
-            setFilecheck(true)
-            setChangeFile(false)
-            setattchmentUrl("")
-            document.querySelector("figure").remove();
-            let storageRef = storageService.ref();
-            let imagesRef = storageRef.child(`${posts.user}/${fileNamed}`)
-            imagesRef.delete().then(()=>{
-             console.log("성공")
-            })
-            setDeleteBtn(true)
-    }
-
+    } 
+  
     return (
         <div className="upload">
             <form onSubmit={post}>
@@ -130,23 +105,36 @@ function Edit(props) {
                     value={textarea} 
                     onChange={e=>setTextarea(e.target.value)}
                     />
-                    <div>
                     <figure>
-                        {
-                            posts.url === "" ? "" : <img src={posts.url} className="att"  alt=""/>
-                        }
+                      {
+                        keep === false ? (
+                            <>
+                            {
+                                saveImage.map(function(url,i){
+                                    return <img src={url} alt="" className="att" key={i}></img>
+                                })
+                            }
+                            </>
+                        ) : (
+                            <>
+                            {
+                                preview.map(function(url,i){
+                                    return <img src={url} alt="" className="att" key={i}></img>
+                        })
+                            }
+                            </>
+                        )
+                      }
                     </figure>
-                    </div>
                 </div>
-                <input type="file" accept="image/*" className="file-form" id="image" onChange={onFileChange}/>
+                <input type="file" accept="image/*" multiple className="file-form" id="image" onChange={onFileChange}/>
                 <label htmlFor="image" className="Attachment image-att">이미지를 담아주세요</label>
-                <p className="warnning">※ 파일삭제는 게시글에 이미지를 안넣고 싶을 때만 사용해주세요.</p>
+                <p className="warnning">※ 이미지를 한번에 업로드 해주세요.</p>
                 <div className="bottom_wrap">
                 <div className="exit" onClick={()=>{
-                    history.push(`/detail?id=${locationEdit}`)
+                   history.push(`/detail?id=${locationEdit}`)
                 }}>← &nbsp;나가기</div>
             <div className="cancel_wrap">
-                <div className="delete" onClick={deletes}>파일삭제</div>
                 <button type="submit" className="post">글작성</button>
             </div>
             </div>

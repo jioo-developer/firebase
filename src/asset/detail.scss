@@ -5,6 +5,7 @@
   width: 90%;
   margin-top: 20px;
   position: relative;
+  height: auto;
 
   .in_wrap {
     width: 50%;
@@ -94,7 +95,8 @@
   }
 
   .content_wrap {
-    float: left;
+    display: flex;
+    flex-direction: column;
     @include size();
     padding-bottom: 20px;
 
@@ -119,7 +121,13 @@
 
       img {
         width: 100%;
+        margin: 5px 0;
       }
+    }
+
+    .att {
+      width: 100%;
+      margin: 5px 0;
     }
 
     .comment {

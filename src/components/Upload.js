@@ -8,16 +8,17 @@ function Upload(props) {
     let [title,setTitle] = useState("")
     let [posts,setPosts] = useState([])
     let [textarea,setTextarea] =  useState("");
-    let [file,setFile] = useState("");
-    let [fileName,setFileName] = useState("")
     let user = props.user
-    let attchmentUrl ="";
+    let attchmentUrl =[];
     let time = new Date();
     let year = time.getFullYear();
     let month = time.getMonth()+1;
     let day = time.getDate();
     const history = useHistory();
     let max = 10000
+    let [preview,setPreview] = useState([])
+    let [filename,setFileName] = useState([])
+    let array = []
 
     useEffect(()=>{
     db.collection("post").onSnapshot((snapshot)=>{
@@ -29,27 +30,31 @@ function Upload(props) {
   },[])
 
     function onFileChange(e){
-        const theFile = e.target.files[0];
-        setFileName(theFile)
-        const reader = new FileReader();
-        reader.onloadend = (finished) => {
-            const {
-                currentTarget : {result},
-            } = finished
+    let files = Array.from(e.target.files)
+    setFileName(files)
+    for(var i =0; i < files.length; i++){
+      const reader = new FileReader();
+      if(files){
+        reader.readAsDataURL(files[i])
+      }
 
-            setFile(result)
-        }
-            if(theFile){
-                reader.readAsDataURL(theFile)
-            }
+      reader.onload = async e =>{
+        array.push(e.target.result)
+        let copyPreview = [...preview]
+        await copyPreview.push(...array);
+        setPreview(copyPreview)
+      }
     }
-
+    }
+    
     async function post(e){
         e.preventDefault();
-        if(file !== "" ){
-            const fileRef = storageService.ref().child(`${user.displayName}/${fileName.name}`)
-            const response = await fileRef.putString(file,"data_url");
-            attchmentUrl = await response.ref.getDownloadURL();
+        if(preview.length !== 0 ){
+            for(var i=0; i<preview.length; i++){
+                const fileRef = storageService.ref().child(`${user.displayName}/${filename[i].name}`)
+                const response = await fileRef.putString(preview[i],"data_url");
+                attchmentUrl.push(await response.ref.getDownloadURL());
+            }
         } 
 
         const content = {
@@ -58,12 +63,15 @@ function Upload(props) {
             user :user.displayName,
             writer : user.uid,
             date: `${year}년${month}월${day}일`,
-            url : attchmentUrl,
+            url : attchmentUrl.length === 0 ? "" : attchmentUrl,
             favorite : 0,
             profile : user.photoURL,
-            fileName : file === "" ? "" : fileName.name,
+            fileName : filename.length === 0 ? "" : filename.map(function(a,i){
+              return filename[i].name
+            }),
             order : max-posts.length-1
         }
+
 
         await db.collection("post").add(content).then(()=>{
             window.alert("포스트가 업로드 되었습니다.")
@@ -76,7 +84,7 @@ function Upload(props) {
         document.querySelector(".text").value="";
         document.querySelector(".file-form").value=null;
         setTimeout(() => {
-            setFile(null)
+            setPreview(null)
         }, 1000);
     }
 
@@ -93,13 +101,16 @@ function Upload(props) {
                     onChange={e=>setTextarea(e.target.value)}
                     />
                     <figure>
-                    {
-                        file && <img src={file} className="att" alt=""/>
-                    }
+                      {
+                        preview && preview.map(function(url,i){
+                          return <img src={url} alt="" className="att" key={i}></img>
+                        })
+                      }
                     </figure>
                 </div>
-                <input type="file" accept="image/*" className="file-form" id="image" onChange={onFileChange}/>
+                <input type="file" accept="image/*" multiple className="file-form" id="image" onChange={onFileChange}/>
                 <label htmlFor="image" className="Attachment image-att">이미지를 담아주세요</label>
+                <p className="warnning">※ 이미지를 한번에 업로드 해주세요.</p>
                 <div className="bottom_wrap">
                 <div className="exit" onClick={()=>{
                     history.push("/")
