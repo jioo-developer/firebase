@@ -7,7 +7,6 @@ import Header from './Header';
 function Home(props) {
   const history = useHistory();
   let [posts,setPosts] = useState([])
-  let[sumNail,setSumNail] = useState([])
   let user =props.user
   let order;
 

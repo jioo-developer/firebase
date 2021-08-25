@@ -14,7 +14,6 @@ function Detail(props) {
   const history = useHistory();
   let user = props.user
   var uid = user.displayName
-  var id = user.uid
   let time = new Date();
   let year = time.getFullYear();
   let month = time.getMonth()+1;
