@@ -60,7 +60,7 @@
       .att {
         float: left;
         width: 400px;
-        height: 400px;
+        height: auto;
         padding-left: 10px;
 
         @media #{$breakpoint-mobile} {
