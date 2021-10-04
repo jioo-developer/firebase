@@ -32,8 +32,8 @@ function Upload(props) {
     function onFileChange(e){
     let files = Array.from(e.target.files)
     setFileName(files)
+    const reader = new FileReader();
     for(var i =0; i < files.length; i++){
-      const reader = new FileReader();
       if(files){
         reader.readAsDataURL(files[i])
       }
