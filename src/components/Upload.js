@@ -115,9 +115,9 @@ function Upload(props) {
                 }}>← &nbsp;나가기</div>
             <div className="cancel_wrap">
                 {
-                  title === "" && textarea === "" ? <div className='none_text post' onClick={()=>{
+                  title !== "" && textarea !== "" ? <button type="submit" className="post" onClick={reset}>글작성</button> : <div className='none_text post' onClick={()=>{
                     window.alert("제목과 내용을 다 입력하셨는지 확인해주세요")
-                  }}>글작성</div> : <button type="submit" className="post" onClick={reset}>글작성</button>
+                  }}>글작성</div> 
                 }
             </div>
             </div>
