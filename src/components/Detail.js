@@ -175,7 +175,7 @@ function Detail(props) {
                     </div>
                 </section>
                 <section className="content_wrap">
-                  <p className="text">{posts.text}</p>
+                  <pre className="text">{posts.text}</pre>
                   {
                     mapData.map(function(url,i){
                       return <img src={url} className="att" alt="" key={i}/>

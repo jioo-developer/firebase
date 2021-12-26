@@ -93,6 +93,7 @@ function Upload(props) {
                 <div className="textarea">
                     <TextareaAutosize
                     cacheMeasurements
+                    contenteditable="true"
                     onHeightChange={(height) => console.log(height)}
                     className="text"
                     placeholder="당신의 이야기를 적어보세요."
