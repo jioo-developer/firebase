@@ -50,7 +50,6 @@
         .thumbnail {
           @include size();
           height: 180px;
-          background: #ddd;
           border-top-left-radius: 5px;
           border-top-right-radius: 5px;
           overflow: hidden;
