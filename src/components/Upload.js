@@ -71,8 +71,6 @@ function Upload(props) {
             }),
             order : max-posts.length-1
         }
-
-
         await db.collection("post").add(content).then(()=>{
             window.alert("포스트가 업로드 되었습니다.")
             history.push("/")
@@ -116,7 +114,11 @@ function Upload(props) {
                     history.push("/")
                 }}>← &nbsp;나가기</div>
             <div className="cancel_wrap">
-                <button type="submit" className="post" onClick={reset}>글작성</button>
+                {
+                  title === "" && textarea === "" ? <div className='none_text post' onClick={()=>{
+                    window.alert("제목과 내용을 다 입력하셨는지 확인해주세요")
+                  }}>글작성</div> : <button type="submit" className="post" onClick={reset}>글작성</button>
+                }
             </div>
             </div>
             </form>

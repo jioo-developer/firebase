@@ -131,6 +131,12 @@
         }
       }
 
+      .none_text {
+        background: gray;
+        text-align: center;
+        line-height: 45px;
+      }
+
       .delete {
         @extend .post;
         background: rgb(241, 243, 245);
