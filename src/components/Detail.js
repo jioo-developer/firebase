@@ -94,11 +94,14 @@ function Detail(props) {
           profile : user.photoURL,
           uids : user.uid
     };
-
+    if(comment_content.comment === ""){
+            window.alert("댓글을 입력해주세요")
+    } else {
     await db.collection("post").doc(locations).collection("reply").add(comment_content).then(()=>{
       window.alert("댓글을 달았습니다.")
       document.querySelector(".comment_input").value=""
     })
+    }
   }
 
   function edit_reply(e){
