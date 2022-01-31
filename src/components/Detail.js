@@ -160,7 +160,7 @@ function Detail(props) {
                             <p className="date">{posts.date}</p>
                         </div>
                         {
-                          user.uid === posts.writer ? (
+                          user.uid === posts.writer || user.uid === "Qzq3BAJaw5doQk1Xjbvvu376iRn1" ? (
                             <>
                             <div className="right_wrap">
                             <button className="edit" onClick={()=>{
