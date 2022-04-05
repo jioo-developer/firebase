@@ -23,6 +23,9 @@ function Detail(props) {
   let [commentChange,setCommentChange] = useState(false)
   let [newComment,setNewComment] = useState("")
   let [mapData,setMapdata] = useState([])
+  let clientWidths;
+  let naturalWidths;
+  let [imgLazy,setImgLazy] = useState(false)
 
   function setCookie(name,value,expiredays){
     let today = new Date();
@@ -61,9 +64,20 @@ function Detail(props) {
   },[posts])
 
   useEffect(()=>{
-      console.log(mapData)
-  },[mapData])
-
+    setTimeout(() => {
+      let imgTarget = Array.from(document.getElementsByClassName("att"))
+      imgTarget.map(function(a,i){
+        naturalWidths = document.getElementsByClassName("att")[i].naturalWidth
+        clientWidths  = document.getElementsByClassName("att")[i].offsetWidth
+        if (naturalWidths < clientWidths){
+            imgTarget[i].classList.add("natural-size")
+        } else {
+          imgTarget[i].classList.add("full-size")
+      }   
+      })
+    },500);
+  },[])
+  
   async function onDelete(e){
     e.preventDefault();
     const ok = window.confirm("정말 삭제 하시겠습니까?");
@@ -176,10 +190,16 @@ function Detail(props) {
                 </section>
                 <section className="content_wrap">
                   <pre className="text">{posts.text}</pre>
-                  {
-                    mapData.map(function(url,i){
+                  { mapData.filter((value,idx,arr)=>{
+                      return(
+                        arr.findIndex((item)=> item === value
+                        ) === idx
+                      )
+                    })
+                    .map(function(url,i){
                       return <img src={url} className="att" alt="" key={i}/>
                     })
+                    
                   }
                     <div className="comment">
                       <div className="favorite_wrap">
@@ -239,7 +259,7 @@ function Detail(props) {
                       <form onSubmit={commentUpload}>
                       <TextareaAutosize
                       cacheMeasurements
-                      onHeightChange={(height) => console.log(height)}
+                      onHeightChange={(height) => ("")}
                       minRows={4}
                       className="comment_input"
                       onChange={e=>setcomment(e.target.value)}

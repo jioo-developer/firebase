@@ -22,6 +22,12 @@
       margin-top: 32px;
       flex-wrap: wrap;
 
+      a {
+        @media #{$breakpoint-mobile} {
+          width: 100%;
+        }
+      }
+
       .post {
         display: flex;
         width: 20rem;

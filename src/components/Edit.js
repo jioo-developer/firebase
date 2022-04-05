@@ -129,7 +129,7 @@ function Edit(props) {
                 </div>
                 <input type="file" accept="image/*" multiple className="file-form" id="image" onChange={onFileChange}/>
                 <label htmlFor="image" className="Attachment image-att">이미지를 담아주세요</label>
-                <p className="warnning">※ 이미지를 한번에 업로드 해주세요.</p>
+                <p className="warnning">※ 이미지를 한번에 업로드 해주세요. (하나씩x)</p>
                 <div className="bottom_wrap">
                 <div className="exit" onClick={()=>{
                    history.push(`/detail?id=${locationEdit}`)

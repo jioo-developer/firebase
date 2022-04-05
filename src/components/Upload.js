@@ -32,8 +32,8 @@ function Upload(props) {
     function onFileChange(e){
     let files = Array.from(e.target.files)
     setFileName(files)
-    const reader = new FileReader();
     for(var i =0; i < files.length; i++){
+          const reader = new FileReader();
       if(files){
         reader.readAsDataURL(files[i])
       }
@@ -109,7 +109,7 @@ function Upload(props) {
                 </div>
                 <input type="file" accept="image/*" multiple className="file-form" id="image" onChange={onFileChange}/>
                 <label htmlFor="image" className="Attachment image-att">이미지를 담아주세요</label>
-                <p className="warnning">※ 이미지를 한번에 업로드 해주세요.</p>
+                <p className="warnning">※ 이미지를 한번에 업로드 해주세요. (하나씩X)</p>
                 <div className="bottom_wrap">
                 <div className="exit" onClick={()=>{
                     history.push("/")

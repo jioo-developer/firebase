@@ -130,6 +130,7 @@
     .att {
       width: 100%;
       margin: 5px 0;
+      visibility: hidden;
     }
 
     .comment {
@@ -273,5 +274,13 @@
         color: #fff;
       }
     }
+  }
+  .natural-size{
+    width: auto !important;
+    align-self: flex-start;
+    visibility: visible !important;
+  }
+  .full-size{
+   visibility: visible !important;
   }
 }
