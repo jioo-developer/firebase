@@ -66,6 +66,7 @@ function Detail(props) {
   useEffect(()=>{
     setTimeout(() => {
       let imgTarget = Array.from(document.getElementsByClassName("att"))
+      let grid = document.getElementsByClassName("grid")
       imgTarget.map(function(a,i){
         naturalWidths = document.getElementsByClassName("att")[i].naturalWidth
         clientWidths  = document.getElementsByClassName("att")[i].offsetWidth
@@ -75,6 +76,9 @@ function Detail(props) {
           imgTarget[i].classList.add("full-size")
       }   
       })
+      if(imgTarget.length > 1){
+        grid[0].classList.add("grids")
+      }
     },500);
   },[])
   
@@ -190,6 +194,7 @@ function Detail(props) {
                 </section>
                 <section className="content_wrap">
                   <pre className="text">{posts.text}</pre>
+                  <div className='grid'>
                   { mapData.filter((value,idx,arr)=>{
                       return(
                         arr.findIndex((item)=> item === value
@@ -201,6 +206,7 @@ function Detail(props) {
                     })
                     
                   }
+                  </div>
                     <div className="comment">
                       <div className="favorite_wrap">
                         <p className="com_title">게시글에 대한 댓글을 달아주세요.</p>

@@ -283,4 +283,16 @@
   .full-size{
    visibility: visible !important;
   }
+
+  .grids{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    
+    .att{
+      width: 100% !important;
+    }
+  }
+
+
 }

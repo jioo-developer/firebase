@@ -15,7 +15,7 @@ function Notice() {
         text : "닉네임 변경 시 이전에 작성하신 게시물들의 작성자는 바뀌지 않습니다."
         },
         {title:"사진 업로드 기능안내",
-        text : "현재 베타버전이기 때문에 사진은 한장만 올라갑니다 양해 부탁드립니다."
+        text : "사진 용량이 많은 파일은 업로드가 느릴 수 있으니 되도록 용량이 작게 압축해서 올려주세요."
         },
         {title:"비밀번호 변경문의 안내",
         text : "비밀번호 변경은 비밀번호 찾기를 통해 이메일로 전송되는 메일을 통해 변경 하실 수 있습니다."
@@ -37,7 +37,6 @@ function Notice() {
                                 <div className="tag">
                                 <p className="tag_in">공지사항</p>
                             </div>
-                            <div className="post_date">{`${year}년${month}월${day}일`}</div>
                         </div>
                       </div>
                      </div>
